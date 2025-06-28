@@ -108,40 +108,81 @@ const ChatWidget: React.FC = () => {
 
   return (
     <>
-      {/* Chat Button - Using the new uploaded image */}
+      {/* Chat Button - FIXED: Enhanced visibility with better contrast */}
       <button
         onClick={toggleChat}
-        className="fixed bottom-6 right-6 z-40 px-6 py-3 rounded-full shadow-lg flex items-center space-x-3 hover:bg-[rgba(105,117,101,0.2)] transition-colors"
-        style={{ backgroundColor: 'rgba(105, 117, 101, 0.1)' }}
+        className="fixed bottom-6 right-6 z-40 px-6 py-3 rounded-full shadow-lg flex items-center space-x-3 transition-all duration-300 hover:shadow-xl"
+        style={{ 
+          backgroundColor: 'rgba(24, 28, 20, 0.95)', // Darker, more opaque background
+          border: '2px solid rgb(105, 117, 101)', // Visible border
+          backdropFilter: 'blur(10px)'
+        }}
       >
-        <div className="w-8 h-8 relative rounded-full overflow-hidden bg-[rgb(236,223,204)] flex items-center justify-center">
-          {/* Using the new uploaded image */}
+        {/* FIXED: Enhanced image container with better visibility */}
+        <div 
+          className="w-8 h-8 relative rounded-full overflow-hidden flex items-center justify-center"
+          style={{ 
+            backgroundColor: 'rgb(236, 223, 204)', // Solid background for contrast
+            border: '1px solid rgb(105, 117, 101)' // Border for definition
+          }}
+        >
           <img
-            src="/lovable-uploads/ChatGPT_Image_Jun_27__2025__12_03_44_PM-removebg-preview copy.png"
+            src="/image.png" // Using the uploaded image
             alt="RARITONE Chat"
             className="w-6 h-6 object-contain"
+            style={{
+              filter: 'contrast(1.2) brightness(0.9)', // Enhanced contrast and slight darkening
+              opacity: 1 // Full opacity
+            }}
           />
         </div>
-        {/* Keep same text and size whether open or closed */}
-        <span className="font-medium text-[rgb(236,223,204)]">
+        {/* FIXED: Enhanced text visibility */}
+        <span 
+          className="font-medium"
+          style={{ 
+            color: 'rgb(236, 223, 204)', // High contrast text
+            textShadow: '0 1px 2px rgba(0,0,0,0.3)' // Text shadow for better readability
+          }}
+        >
           Chat with us
         </span>
       </button>
 
-      {/* Chat Modal - Fixed contrast issues */}
+      {/* Chat Modal - FIXED: Enhanced contrast throughout */}
       {isOpen && (
         <div
-          className="fixed bottom-24 right-6 z-50 w-96 rounded-2xl shadow-2xl border border-[rgb(105,117,101)] overflow-hidden"
-          style={{ backgroundColor: 'rgb(60, 61, 55)' }} // #3C3D37 bg
+          className="fixed bottom-24 right-6 z-50 w-96 rounded-2xl shadow-2xl overflow-hidden"
+          style={{ 
+            backgroundColor: 'rgb(60, 61, 55)', // #3C3D37 bg
+            border: '2px solid rgb(105, 117, 101)', // Stronger border
+            boxShadow: '0 20px 40px rgba(0,0,0,0.3)' // Enhanced shadow
+          }}
         >
-          {/* Header - Clean background, no logo interference */}
-          <div className="text-[rgb(236,223,204)] p-4 flex items-center justify-between" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
+          {/* Header - FIXED: Better contrast and image visibility */}
+          <div 
+            className="text-[rgb(236,223,204)] p-4 flex items-center justify-between" 
+            style={{ 
+              backgroundColor: 'rgb(24, 28, 20)',
+              borderBottom: '1px solid rgb(105, 117, 101)'
+            }}
+          >
             <div className="flex items-center space-x-3">
-              <div className="w-8 h-8 bg-[rgb(236,223,204)] rounded-full flex items-center justify-center">
+              {/* FIXED: Enhanced header image with better visibility */}
+              <div 
+                className="w-8 h-8 rounded-full flex items-center justify-center"
+                style={{ 
+                  backgroundColor: 'rgb(236, 223, 204)', // Solid background
+                  border: '1px solid rgb(105, 117, 101)' // Border for definition
+                }}
+              >
                 <img
-                  src="/lovable-uploads/ChatGPT_Image_Jun_27__2025__12_03_44_PM-removebg-preview copy.png"
+                  src="/image.png" // Using the uploaded image
                   alt="RARITONE"
                   className="w-6 h-6 object-contain"
+                  style={{
+                    filter: 'contrast(1.2) brightness(0.9)', // Enhanced contrast
+                    opacity: 1 // Full opacity
+                  }}
                 />
               </div>
               <span className="font-medium">Chat with a client advisor</span>
@@ -191,7 +232,7 @@ const ChatWidget: React.FC = () => {
                     </div>
                     <button
                       type="submit"
-                      className="w-full bg-[rgb(236,223,204)] text-[rgb(24,28,20)] py-2 rounded-md hover:bg-[rgb(220,210,190)] transition-colors"
+                      className="w-full bg-[rgb(236,223,204)] text-[rgb(24,28,20)] py-2 rounded-md hover:bg-[rgb(220,210,190)] transition-colors font-medium"
                     >
                       Start chat
                     </button>
@@ -237,7 +278,13 @@ const ChatWidget: React.FC = () => {
                   </div>
 
                   {/* Message Input */}
-                  <div className="p-4 border-t border-[rgb(105,117,101)]" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
+                  <div 
+                    className="p-4" 
+                    style={{ 
+                      backgroundColor: 'rgb(60, 61, 55)',
+                      borderTop: '1px solid rgb(105, 117, 101)'
+                    }}
+                  >
                     <div className="flex space-x-2">
                       <input
                         type="text"
@@ -250,7 +297,7 @@ const ChatWidget: React.FC = () => {
                       />
                       <button
                         onClick={handleSendMessage}
-                        className="px-4 py-2 bg-[rgb(236,223,204)] text-[rgb(24,28,20)] rounded-full hover:bg-[rgb(220,210,190)] transition-colors"
+                        className="px-4 py-2 bg-[rgb(236,223,204)] text-[rgb(24,28,20)] rounded-full hover:bg-[rgb(220,210,190)] transition-colors font-medium"
                       >
                         <Send size={16} />
                       </button>
