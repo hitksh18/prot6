@@ -108,35 +108,35 @@ const ChatWidget: React.FC = () => {
 
   return (
     <>
-      {/* Chat Button - FIXED: Enhanced visibility with better contrast */}
+      {/* Chat Button - UPDATED: New logo with black background */}
       <button
         onClick={toggleChat}
         className="fixed bottom-6 right-6 z-40 px-6 py-3 rounded-full shadow-lg flex items-center space-x-3 transition-all duration-300 hover:shadow-xl"
         style={{ 
-          backgroundColor: 'rgba(24, 28, 20, 0.95)', // Darker, more opaque background
+          backgroundColor: 'rgba(0, 0, 0, 0.95)', // Black background as requested
           border: '2px solid rgb(105, 117, 101)', // Visible border
           backdropFilter: 'blur(10px)'
         }}
       >
-        {/* FIXED: Enhanced image container with better visibility */}
+        {/* UPDATED: New logo container with black background */}
         <div 
           className="w-8 h-8 relative rounded-full overflow-hidden flex items-center justify-center"
           style={{ 
-            backgroundColor: 'rgb(236, 223, 204)', // Solid background for contrast
+            backgroundColor: 'rgb(0, 0, 0)', // Black background for logo container
             border: '1px solid rgb(105, 117, 101)' // Border for definition
           }}
         >
           <img
-            src="/image.png" // Using the uploaded image
+            src="/lovable-uploads/ChatGPT_Image_Jun_27__2025__12_03_44_PM-removebg-preview copy copy.png" // Using the new uploaded logo
             alt="RARITONE Chat"
             className="w-6 h-6 object-contain"
             style={{
-              filter: 'contrast(1.2) brightness(0.9)', // Enhanced contrast and slight darkening
+              filter: 'brightness(1.2) contrast(1.1)', // Enhanced brightness for visibility on black
               opacity: 1 // Full opacity
             }}
           />
         </div>
-        {/* FIXED: Enhanced text visibility */}
+        {/* Enhanced text visibility */}
         <span 
           className="font-medium"
           style={{ 
@@ -148,7 +148,7 @@ const ChatWidget: React.FC = () => {
         </span>
       </button>
 
-      {/* Chat Modal - FIXED: Enhanced contrast throughout */}
+      {/* Chat Modal - UPDATED: Enhanced contrast with new logo */}
       {isOpen && (
         <div
           className="fixed bottom-24 right-6 z-50 w-96 rounded-2xl shadow-2xl overflow-hidden"
@@ -158,7 +158,7 @@ const ChatWidget: React.FC = () => {
             boxShadow: '0 20px 40px rgba(0,0,0,0.3)' // Enhanced shadow
           }}
         >
-          {/* Header - FIXED: Better contrast and image visibility */}
+          {/* Header - UPDATED: New logo with black background */}
           <div 
             className="text-[rgb(236,223,204)] p-4 flex items-center justify-between" 
             style={{ 
@@ -167,20 +167,20 @@ const ChatWidget: React.FC = () => {
             }}
           >
             <div className="flex items-center space-x-3">
-              {/* FIXED: Enhanced header image with better visibility */}
+              {/* UPDATED: New logo in header with black background */}
               <div 
                 className="w-8 h-8 rounded-full flex items-center justify-center"
                 style={{ 
-                  backgroundColor: 'rgb(236, 223, 204)', // Solid background
+                  backgroundColor: 'rgb(0, 0, 0)', // Black background for header logo
                   border: '1px solid rgb(105, 117, 101)' // Border for definition
                 }}
               >
                 <img
-                  src="/image.png" // Using the uploaded image
+                  src="/lovable-uploads/ChatGPT_Image_Jun_27__2025__12_03_44_PM-removebg-preview copy copy.png" // Using the new uploaded logo
                   alt="RARITONE"
                   className="w-6 h-6 object-contain"
                   style={{
-                    filter: 'contrast(1.2) brightness(0.9)', // Enhanced contrast
+                    filter: 'brightness(1.2) contrast(1.1)', // Enhanced brightness for visibility on black
                     opacity: 1 // Full opacity
                   }}
                 />
