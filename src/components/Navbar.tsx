@@ -107,7 +107,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
         variants={navbarVariants}
         initial="hidden"
         animate={isVisible ? "visible" : "hidden"}
-        className={`fixed top-0 left-0 right-0 ${isMenuOpen ? 'z-30' : 'z-50'} transition-all duration-300`}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
         style={{ 
           backgroundColor: `rgba(105, 117, 101, ${navbarOpacity})`, // Dynamic opacity
           borderBottom: '1px solid rgb(236, 223, 204)',
@@ -117,65 +117,60 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Left - Enhanced Menu Button */}
-            <div className="flex items-center relative z-60" style={{ marginRight: '16px' }}>
+            {/* Left - Enhanced Menu Button with Smooth Hamburger Animation */}
+            <div className="flex items-center relative" style={{ marginRight: '16px' }}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleMenuClick}
-                className="flex items-center space-x-3 text-[rgb(236,223,204)] hover:text-[rgb(60,61,55)] transition-all duration-300 relative z-60 p-2 rounded-lg"
+                className="flex items-center space-x-3 text-[rgb(236,223,204)] hover:text-[rgb(60,61,55)] transition-all duration-300 relative p-2 rounded-lg"
               >
-                {/* Enhanced Hamburger Animation - Smoother transitions */}
-                <div className="relative w-7 h-7 flex flex-col justify-center items-center z-60">
+                {/* ENHANCED Hamburger to Cross Animation */}
+                <div className="relative w-7 h-7 flex flex-col justify-center items-center">
                   <motion.span
                     animate={{
                       rotate: isMenuOpen ? 45 : 0,
-                      y: isMenuOpen ? 0 : -5,
+                      y: isMenuOpen ? 0 : -6,
                       scaleX: isMenuOpen ? 1.1 : 1,
                     }}
                     transition={{ 
-                      duration: 0.4, 
+                      duration: 0.3, 
                       ease: [0.25, 0.46, 0.45, 0.94],
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 20
+                      type: "tween"
                     }}
-                    className="absolute w-7 h-0.5 bg-current rounded-full"
+                    className="absolute w-6 h-0.5 bg-current rounded-full"
                     style={{ transformOrigin: 'center' }}
                   />
                   <motion.span
                     animate={{
                       opacity: isMenuOpen ? 0 : 1,
                       scale: isMenuOpen ? 0.8 : 1,
-                      rotate: isMenuOpen ? 180 : 0,
                     }}
                     transition={{ 
-                      duration: 0.3, 
+                      duration: 0.2, 
                       ease: [0.25, 0.46, 0.45, 0.94] 
                     }}
-                    className="absolute w-7 h-0.5 bg-current rounded-full"
+                    className="absolute w-6 h-0.5 bg-current rounded-full"
                   />
                   <motion.span
                     animate={{
                       rotate: isMenuOpen ? -45 : 0,
-                      y: isMenuOpen ? 0 : 5,
+                      y: isMenuOpen ? 0 : 6,
                       scaleX: isMenuOpen ? 1.1 : 1,
                     }}
                     transition={{ 
-                      duration: 0.4, 
+                      duration: 0.3, 
                       ease: [0.25, 0.46, 0.45, 0.94],
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 20
+                      type: "tween"
                     }}
-                    className="absolute w-7 h-0.5 bg-current rounded-full"
+                    className="absolute w-6 h-0.5 bg-current rounded-full"
                     style={{ transformOrigin: 'center' }}
                   />
                 </div>
                 
                 {/* Enhanced Text Animation */}
                 <motion.span 
-                  className="text-sm font-medium relative z-60 hidden sm:block"
+                  className="text-sm font-medium relative hidden sm:block"
                   animate={{ 
                     opacity: 1,
                     x: 0,
@@ -280,66 +275,38 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
             </div>
           </div>
         </div>
-      </motion.nav>
 
-      {/* Enhanced Left Menu Sidebar with Smooth Animations */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <>
+        {/* MENU DROPDOWN - POSITIONED BELOW NAVBAR */}
+        <AnimatePresence>
+          {isMenuOpen && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="fixed inset-0 z-40 bg-black/60 backdrop-blur-sm"
-              onClick={() => setIsMenuOpen(false)}
-            />
-            <motion.div
-              initial={{ x: '-100%', opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              exit={{ x: '-100%', opacity: 0 }}
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
               transition={{ 
-                type: 'spring', 
-                damping: 30, 
-                stiffness: 300,
-                duration: 0.4
+                duration: 0.3, 
+                ease: [0.25, 0.46, 0.45, 0.94]
               }}
-              style={{ backgroundColor: 'rgb(24, 28, 20)' }}
-              className="fixed left-0 top-0 h-full w-80 sm:w-96 z-50 shadow-2xl"
+              style={{ 
+                backgroundColor: 'rgb(24, 28, 20)',
+                borderTop: '1px solid rgb(105, 117, 101)'
+              }}
+              className="overflow-hidden"
             >
-              <div className="p-6 sm:p-8">
-                <div className="flex justify-between items-center mb-8">
-                  <motion.h2 
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                    className="text-2xl font-semibold text-[rgb(236,223,204)]"
-                  >
-                    Menu
-                  </motion.h2>
-                  <motion.button
-                    whileHover={{ scale: 1.1, rotate: 90 }}
-                    whileTap={{ scale: 0.9 }}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="text-[rgb(236,223,204)] hover:text-[rgb(105,117,101)] transition-all duration-300 p-2 rounded-lg"
-                  >
-                    <X size={24} />
-                  </motion.button>
-                </div>
-
-                <div className="space-y-3">
+              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                   {menuItems.map((item, index) => (
                     <motion.div
                       key={item.label}
-                      initial={{ opacity: 0, x: -30 }}
-                      animate={{ opacity: 1, x: 0 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
                       transition={{ 
-                        delay: index * 0.1 + 0.3,
-                        duration: 0.4,
+                        delay: index * 0.1,
+                        duration: 0.3,
                         ease: [0.25, 0.46, 0.45, 0.94]
                       }}
                       whileHover={{ 
-                        x: 8,
+                        y: -2,
                         transition: { duration: 0.2, ease: "easeOut" }
                       }}
                       className="rounded-xl hover:bg-[rgb(60,61,55)] transition-all duration-300"
@@ -353,24 +320,24 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
                           }
                           setIsMenuOpen(false);
                         }}
-                        className="w-full text-left px-6 py-4 text-[rgb(236,223,204)] hover:text-[rgb(105,117,101)] transition-all duration-300 flex items-center space-x-4 rounded-xl"
+                        className="w-full text-center px-4 py-6 text-[rgb(236,223,204)] hover:text-[rgb(105,117,101)] transition-all duration-300 flex flex-col items-center space-y-3 rounded-xl"
                       >
                         <motion.div
                           whileHover={{ scale: 1.2, rotate: 5 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <item.icon size={22} />
+                          <item.icon size={24} />
                         </motion.div>
-                        <span className="text-lg font-medium">{item.label}</span>
+                        <span className="text-sm font-medium">{item.label}</span>
                       </button>
                     </motion.div>
                   ))}
                 </div>
               </div>
             </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </motion.nav>
 
       {/* Enhanced Right Profile Sidebar */}
       <AnimatePresence>
@@ -491,7 +458,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
                     className="w-full text-left px-4 py-3 text-red-400 hover:bg-red-900/20 border border-red-500 rounded-xl transition-all duration-300"
                   >
                     Logout
-                  </motion.button>
+                  </button>
                 </div>
               </div>
             </motion.div>
