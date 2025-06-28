@@ -22,8 +22,8 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      // NAVBAR IS COMPLETELY HIDDEN - Never show
-      setIsVisible(false);
+      // INSTANT navbar appearance - no delay
+      setIsVisible(window.scrollY > 50);
     };
 
     const savedWishlist = localStorage.getItem('wishlist');
@@ -60,12 +60,81 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
 
   return (
     <>
-      {/* NAVBAR - COMPLETELY HIDDEN */}
+      {/* NAVBAR - Fixed colors and instant appearance */}
       <nav
-        className="hidden"
-        style={{ display: 'none !important' }}
+        className={`fixed top-0 left-0 right-0 z-50 ${isVisible ? 'block' : 'hidden'}`}
+        style={{ 
+          backgroundColor: 'rgb(105, 117, 101)', // #697565 - Navbar Background
+          borderBottom: '1px solid rgb(236, 223, 204)' // #ECDFCC - Bottom Border
+        }}
       >
-        {/* Navbar content removed - completely hidden */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Left - Menu with 16px spacing */}
+            <div className="flex items-center" style={{ marginRight: '16px' }}>
+              <button
+                onClick={handleMenuClick}
+                className="flex items-center space-x-2 text-[rgb(236,223,204)] hover:text-[rgb(60,61,55)]"
+              >
+                {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+                <span className="text-sm font-medium">
+                  {isMenuOpen ? 'Close' : 'Menu'}
+                </span>
+              </button>
+            </div>
+
+            {/* Center - Logo (20px height) */}
+            <div className="flex-1 flex justify-center">
+              <img
+                src="/IMG-20250305-WA0003-removebg-preview.png"
+                alt="RARITONE"
+                className="h-5 w-auto cursor-pointer" // 20px height
+                onClick={() => navigate('/')}
+              />
+            </div>
+
+            {/* Right - Actions with 16px spacing */}
+            <div className="flex items-center space-x-4">
+              <button
+                onClick={onSearchOpen}
+                className="text-[rgb(236,223,204)] hover:text-[rgb(60,61,55)]"
+              >
+                <Search size={20} />
+              </button>
+              
+              <button 
+                onClick={() => navigate('/wishlist')}
+                className="relative text-[rgb(236,223,204)] hover:text-[rgb(60,61,55)]"
+              >
+                <Heart size={20} />
+                {wishlistCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {wishlistCount}
+                  </span>
+                )}
+              </button>
+
+              <button
+                onClick={() => navigate('/cart')}
+                className="relative text-[rgb(236,223,204)] hover:text-[rgb(60,61,55)]"
+              >
+                <ShoppingBag size={20} />
+                {cartItemsCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-[rgb(236,223,204)] text-[rgb(24,28,20)] text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                    {cartItemsCount}
+                  </span>
+                )}
+              </button>
+              
+              <button 
+                onClick={handleProfileClick}
+                className="text-[rgb(236,223,204)] hover:text-[rgb(60,61,55)]"
+              >
+                <User size={20} />
+              </button>
+            </div>
+          </div>
+        </div>
       </nav>
 
       {/* Left Menu Sidebar - NO ANIMATIONS */}

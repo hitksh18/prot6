@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { removeFromCart } from '@/lib/user';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '@/components/Navbar';
 
 const Cart = () => {
   const { user, cart, refreshCart } = useAuth();
@@ -59,8 +60,11 @@ const Cart = () => {
   if (cart.length === 0) {
     return (
       <div className="min-h-screen" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
-        {/* NO NAVBAR - Direct content */}
-        <div className="flex items-center justify-center min-h-screen">
+        <Navbar 
+          onSearchOpen={() => {}}
+          onCartOpen={() => {}}
+        />
+        <div className="pt-20 flex items-center justify-center min-h-[80vh]">
           <div className="text-center">
             <h2 className="text-2xl font-semibold text-[rgb(236,223,204)] mb-4">Your cart is empty</h2>
             <p className="text-[rgb(105,117,101)] mb-8">Add some items to get started</p>
@@ -78,8 +82,12 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
-      {/* NO NAVBAR - Direct content */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <Navbar 
+        onSearchOpen={() => {}}
+        onCartOpen={() => {}}
+      />
+      
+      <div className="pt-20 max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center mb-8">
           <motion.button
@@ -282,7 +290,7 @@ const Cart = () => {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="rounded-lg shadow-sm p-6 sticky top-6 border border-[rgb(105,117,101)]" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
+            <div className="rounded-lg shadow-sm p-6 sticky top-24 border border-[rgb(105,117,101)]" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
               <h2 className="text-xl font-semibold text-[rgb(236,223,204)] mb-6">Order Summary</h2>
               
               <div className="space-y-4">

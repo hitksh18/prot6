@@ -5,6 +5,7 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { getUserScans, saveScan, ScanData } from '@/lib/scan';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '@/components/Navbar';
 
 const Scan = () => {
   const { user } = useAuth();
@@ -119,8 +120,11 @@ const Scan = () => {
   if (!user) {
     return (
       <div className="min-h-screen" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
-        {/* NO NAVBAR - Direct content */}
-        <div className="flex items-center justify-center min-h-screen">
+        <Navbar 
+          onSearchOpen={() => {}}
+          onCartOpen={() => {}}
+        />
+        <div className="pt-20 flex items-center justify-center min-h-[80vh]">
           <div className="text-center">
             <h2 className="text-2xl font-semibold text-[rgb(236,223,204)] mb-4">Login Required</h2>
             <p className="text-[rgb(105,117,101)] mb-8">Please login to access body scan feature</p>
@@ -138,8 +142,12 @@ const Scan = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
-      {/* NO NAVBAR - Direct content */}
-      <div className="max-w-6xl mx-auto px-4 py-8">
+      <Navbar 
+        onSearchOpen={() => {}}
+        onCartOpen={() => {}}
+      />
+      
+      <div className="pt-20 max-w-6xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center mb-8">
           <motion.button

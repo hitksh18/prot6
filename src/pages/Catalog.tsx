@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import ProductCard from '@/components/ProductCard';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '@/components/Navbar';
 
 const Catalog = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -158,7 +159,7 @@ const Catalog = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
+      <div className="min-h-screen pt-20 flex items-center justify-center" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[rgb(236,223,204)] mx-auto mb-4"></div>
           <p className="text-[rgb(236,223,204)]">Loading products...</p>
@@ -169,8 +170,12 @@ const Catalog = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
-      {/* NO NAVBAR - Direct content */}
-      <div className="max-w-7xl mx-auto px-4 py-8">
+      <Navbar 
+        onSearchOpen={() => {}}
+        onCartOpen={() => {}}
+      />
+      
+      <div className="pt-20 max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center mb-8">
           <motion.button
