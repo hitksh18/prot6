@@ -3,7 +3,6 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, Heart, ShoppingBag, Trash2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
 
 interface WishlistItem {
   id: string;
@@ -64,12 +63,8 @@ const Wishlist = () => {
 
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
-      <Navbar 
-        onSearchOpen={() => {}}
-        onCartOpen={() => {}}
-      />
-      
-      <div className="pt-20 max-w-4xl mx-auto px-4 py-8">
+      {/* NO NAVBAR - Direct content */}
+      <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center mb-8">
           <motion.button

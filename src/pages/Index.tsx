@@ -52,13 +52,13 @@ const Index = () => {
 
   return (
     <div className="min-h-screen text-[rgb(236,223,204)]" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
-      {/* Navigation */}
+      {/* Navigation - HIDDEN but still functional */}
       <Navbar 
         onSearchOpen={() => setIsSearchOpen(true)}
         onCartOpen={() => setIsCartOpen(true)}
       />
 
-      {/* Hero Section - FIXED overlap issues */}
+      {/* Hero Section - NO navbar spacing needed */}
       <div className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
