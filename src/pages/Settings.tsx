@@ -244,7 +244,6 @@ const Settings = () => {
                       )}
                     </div>
                     {!address.isEditing && (
-                      {/* FIXED: Edit button with consistent styling */}
                       <Button 
                         onClick={() => handleEditAddress(address.id)}
                         variant="outline" 
