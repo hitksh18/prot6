@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import ProductCard from '@/components/ProductCard';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '@/components/Navbar';
 
 const Catalog = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -158,27 +159,32 @@ const Catalog = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-black pt-20 flex items-center justify-center">
+      <div className="min-h-screen pt-20 flex items-center justify-center" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
         <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
-          <p className="text-white">Loading products...</p>
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[rgb(236,223,204)] mx-auto mb-4"></div>
+          <p className="text-[rgb(236,223,204)]">Loading products...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black pt-20">
-      <div className="max-w-7xl mx-auto px-4 py-8">
+    <div className="min-h-screen" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
+      <Navbar 
+        onSearchOpen={() => {}}
+        onCartOpen={() => {}}
+      />
+      
+      <div className="pt-20 max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex items-center mb-8">
           <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={() => navigate(-1)}
-            className="mr-4 p-2 hover:bg-gray-800 rounded-full transition-colors"
+            className="mr-4 p-2 hover:bg-[rgb(24,28,20)] rounded-full transition-colors"
           >
-            <ArrowLeft size={24} className="text-white" />
+            <ArrowLeft size={24} className="text-[rgb(236,223,204)]" />
           </motion.button>
           <div className="flex-1 text-center">
             <img
@@ -188,8 +194,8 @@ const Catalog = () => {
               height={40}
               className="h-8 w-auto mx-auto mb-2"
             />
-            <h1 className="text-3xl font-light text-white">Fashion Catalog</h1>
-            <p className="text-gray-300">Discover our latest collection and find your perfect fit</p>
+            <h1 className="text-3xl font-light text-[rgb(236,223,204)]">Fashion Catalog</h1>
+            <p className="text-[rgb(105,117,101)]">Discover our latest collection and find your perfect fit</p>
           </div>
         </div>
 
@@ -197,17 +203,18 @@ const Catalog = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gray-900 rounded-lg shadow-sm p-6 mb-8 border border-gray-800"
+          className="rounded-lg shadow-sm p-6 mb-8 border border-[rgb(105,117,101)]"
+          style={{ backgroundColor: 'rgb(24, 28, 20)' }}
         >
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4">
             {/* Search */}
             <div className="lg:col-span-2 relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-[rgb(105,117,101)]" size={20} />
               <Input
                 placeholder="Search products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 bg-gray-800 border-gray-700 text-white placeholder-gray-400"
+                className="pl-10 bg-[rgb(60,61,55)] border-[rgb(105,117,101)] text-[rgb(236,223,204)] placeholder-[rgb(105,117,101)]"
               />
             </div>
 
@@ -215,7 +222,7 @@ const Catalog = () => {
             <select
               value={filters.category}
               onChange={(e) => setFilters({...filters, category: e.target.value})}
-              className="px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white bg-gray-800 text-white"
+              className="px-4 py-2 border border-[rgb(105,117,101)] rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(105,117,101)] bg-[rgb(60,61,55)] text-[rgb(236,223,204)]"
             >
               <option value="">All Categories</option>
               <option value="Tops">Tops</option>
@@ -229,7 +236,7 @@ const Catalog = () => {
             <select
               value={filters.brand}
               onChange={(e) => setFilters({...filters, brand: e.target.value})}
-              className="px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white bg-gray-800 text-white"
+              className="px-4 py-2 border border-[rgb(105,117,101)] rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(105,117,101)] bg-[rgb(60,61,55)] text-[rgb(236,223,204)]"
             >
               <option value="">All Brands</option>
               <option value="RARITONE">RARITONE</option>
@@ -241,7 +248,7 @@ const Catalog = () => {
             <select
               value={filters.size}
               onChange={(e) => setFilters({...filters, size: e.target.value})}
-              className="px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white bg-gray-800 text-white"
+              className="px-4 py-2 border border-[rgb(105,117,101)] rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(105,117,101)] bg-[rgb(60,61,55)] text-[rgb(236,223,204)]"
             >
               <option value="">All Sizes</option>
               <option value="XS">XS</option>
@@ -256,7 +263,7 @@ const Catalog = () => {
             <select
               value={filters.sortBy}
               onChange={(e) => setFilters({...filters, sortBy: e.target.value})}
-              className="px-4 py-2 border border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-white bg-gray-800 text-white"
+              className="px-4 py-2 border border-[rgb(105,117,101)] rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(105,117,101)] bg-[rgb(60,61,55)] text-[rgb(236,223,204)]"
             >
               <option value="newest">Newest</option>
               <option value="popular">Popular</option>
@@ -268,7 +275,7 @@ const Catalog = () => {
 
         {/* Results Count */}
         <div className="flex items-center justify-between mb-6">
-          <p className="text-gray-300">
+          <p className="text-[rgb(105,117,101)]">
             Showing {filteredProducts.length} of {products.length} products
           </p>
         </div>
@@ -281,7 +288,8 @@ const Catalog = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
-              className="bg-gray-900 rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-800"
+              className="rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 border border-[rgb(105,117,101)]"
+              style={{ backgroundColor: 'rgb(24, 28, 20)' }}
             >
               <div className="aspect-[3/4] overflow-hidden relative group">
                 <img
@@ -300,16 +308,16 @@ const Catalog = () => {
               </div>
               
               <div className="p-4">
-                <h3 className="font-medium text-white mb-1">{product.name}</h3>
-                <p className="text-sm text-gray-400 mb-2">{product.category}</p>
-                <p className="text-lg font-semibold text-white">₹{product.price}</p>
+                <h3 className="font-medium text-[rgb(236,223,204)] mb-1">{product.name}</h3>
+                <p className="text-sm text-[rgb(105,117,101)] mb-2">{product.category}</p>
+                <p className="text-lg font-semibold text-[rgb(236,223,204)]">₹{product.price}</p>
                 
                 {product.tags && product.tags.length > 0 && (
                   <div className="flex flex-wrap gap-1 mt-2">
                     {product.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="px-2 py-1 text-xs bg-gray-800 text-gray-300 rounded"
+                        className="px-2 py-1 text-xs bg-[rgb(60,61,55)] text-[rgb(105,117,101)] rounded"
                       >
                         {tag}
                       </span>
@@ -323,7 +331,7 @@ const Catalog = () => {
 
         {filteredProducts.length === 0 && (
           <div className="text-center py-12">
-            <p className="text-gray-400">No products found matching your criteria.</p>
+            <p className="text-[rgb(105,117,101)]">No products found matching your criteria.</p>
             <Button 
               onClick={() => {
                 setSearchQuery('');
@@ -335,7 +343,7 @@ const Catalog = () => {
                   sortBy: 'newest'
                 });
               }}
-              className="mt-4 bg-white text-black hover:bg-gray-200"
+              className="mt-4 bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)]"
             >
               Clear Filters
             </Button>
