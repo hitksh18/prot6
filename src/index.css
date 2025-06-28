@@ -43,9 +43,6 @@
 @layer base {
   * {
     @apply border-border;
-    /* REMOVE ALL ANIMATIONS - Set to 0s duration */
-    transition: none !important;
-    animation: none !important;
   }
 
   body {
@@ -62,17 +59,59 @@
   }
 }
 
-/* REMOVE ALL UNNECESSARY ANIMATIONS */
-@keyframes none {
-  0%, 100% { transform: none; }
+/* Custom animations - Restored for navbar */
+@keyframes logo-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
-/* PERFORMANCE OPTIMIZATION - 120FPS */
-* {
-  will-change: auto;
-  transform: translateZ(0);
-  backface-visibility: hidden;
-  perspective: 1000px;
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.logo-float {
+  animation: logo-float 3s ease-in-out infinite;
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.6s ease-out;
+}
+
+.slide-in-right {
+  animation: slide-in-right 0.3s ease-out;
+}
+
+.slide-in-left {
+  animation: slide-in-left 0.3s ease-out;
 }
 
 /* Enhanced scrollbar styling with color palette */
@@ -93,41 +132,16 @@
   background: rgba(105, 117, 101, 0.7); /* #697565 */
 }
 
-/* NO ANIMATIONS - Instant transitions only */
-button {
-  transition: none !important;
-}
-
-button:hover {
-  transform: none !important;
-}
-
-button:active {
-  transform: none !important;
-}
-
-/* Remove all motion classes */
-.animate-spin,
-.animate-pulse,
-.animate-bounce,
-.fade-in-up,
-.slide-in-right,
-.slide-in-left,
-.smooth-scale,
-.logo-float {
-  animation: none !important;
-  transition: none !important;
-}
-
-/* Instant visibility for performance */
+/* Blur backdrop */
 .backdrop-blur-custom {
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 }
 
+/* Frosted glass effect */
 .frosted-glass {
   background: rgba(105, 117, 101, 0.1); /* #697565 */
-  backdrop-filter: none;
-  -webkit-backdrop-filter: none;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(105, 117, 101, 0.2);
 }
