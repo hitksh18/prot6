@@ -2,45 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Updated color system with new luxury palette */
+/* MANDATORY COLOR PALETTE - Applied exactly as specified */
 @layer base {
   :root {
-    --background: 60 61 55; /* #3C3D37 */
-    --foreground: 236 223 204; /* #ECDFCC */
+    --background: 60 61 55; /* #3C3D37 - Main Background */
+    --foreground: 236 223 204; /* #ECDFCC - CTA Buttons & Highlight Text */
 
-    --card: 24 28 20; /* #181C14 */
+    --card: 24 28 20; /* #181C14 - Sidebar/Profile BG */
     --card-foreground: 236 223 204; /* #ECDFCC */
 
     --popover: 24 28 20; /* #181C14 */
     --popover-foreground: 236 223 204; /* #ECDFCC */
 
-    --primary: 236 223 204; /* #ECDFCC */
+    --primary: 236 223 204; /* #ECDFCC - CTA Buttons */
     --primary-foreground: 24 28 20; /* #181C14 */
 
     --secondary: 24 28 20; /* #181C14 */
     --secondary-foreground: 236 223 204; /* #ECDFCC */
 
-    --muted: 24 28 20; /* #181C14 */
-    --muted-foreground: 105 117 101; /* #697565 */
+    --muted: 60 61 55; /* #3C3D37 - Input Background */
+    --muted-foreground: 105 117 101; /* #697565 - Muted Text */
 
-    --accent: 105 117 101; /* #697565 */
+    --accent: 105 117 101; /* #697565 - Input Borders */
     --accent-foreground: 236 223 204; /* #ECDFCC */
 
     --destructive: 220 38 38;
     --destructive-foreground: 248 250 252;
 
-    --border: 105 117 101; /* #697565 */
-    --input: 24 28 20; /* #181C14 */
+    --border: 105 117 101; /* #697565 - Input Borders */
+    --input: 60 61 55; /* #3C3D37 - Input Background */
     --ring: 105 117 101; /* #697565 */
 
-    --sidebar-background: 24 28 20; /* #181C14 */
-    --sidebar-foreground: 236 223 204; /* #ECDFCC */
-    --sidebar-primary: 60 61 55; /* #3C3D37 */
-    --sidebar-primary-foreground: 236 223 204; /* #ECDFCC */
-    --sidebar-accent: 60 61 55; /* #3C3D37 */
-    --sidebar-accent-foreground: 236 223 204; /* #ECDFCC */
-    --sidebar-border: 105 117 101; /* #697565 */
-    --sidebar-ring: 105 117 101; /* #697565 */
+    --navbar-bg: 105 117 101; /* #697565 - Navbar Background */
+    --navbar-border: 236 223 204; /* #ECDFCC - Navbar Bottom Border */
 
     --radius: 0.5rem;
   }
@@ -49,92 +43,39 @@
 @layer base {
   * {
     @apply border-border;
+    /* REMOVE ALL ANIMATIONS - Set to 0s duration */
+    transition: none !important;
+    animation: none !important;
   }
 
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: rgb(60, 61, 55);
-    color: rgb(236, 223, 204);
+    background-color: rgb(60, 61, 55); /* #3C3D37 - Main Background */
+    color: rgb(236, 223, 204); /* #ECDFCC */
   }
 
   html {
-    background-color: rgb(60, 61, 55);
+    background-color: rgb(60, 61, 55); /* #3C3D37 */
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
-/* Enhanced animations for smooth UX */
-@keyframes logo-float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
+/* REMOVE ALL UNNECESSARY ANIMATIONS */
+@keyframes none {
+  0%, 100% { transform: none; }
 }
 
-@keyframes fade-in-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* PERFORMANCE OPTIMIZATION - 120FPS */
+* {
+  will-change: auto;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
-@keyframes slide-in-right {
-  from {
-    opacity: 0;
-    transform: translateX(100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slide-in-left {
-  from {
-    opacity: 0;
-    transform: translateX(-100%);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes smooth-scale {
-  from {
-    transform: scale(0.95);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.logo-float {
-  animation: logo-float 3s ease-in-out infinite;
-}
-
-.fade-in-up {
-  animation: fade-in-up 0.6s ease-out;
-}
-
-.slide-in-right {
-  animation: slide-in-right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.slide-in-left {
-  animation: slide-in-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.smooth-scale {
-  animation: smooth-scale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Enhanced scrollbar styling */
+/* Enhanced scrollbar styling with color palette */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -144,55 +85,49 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(105, 117, 101, 0.5);
+  background: rgba(105, 117, 101, 0.5); /* #697565 */
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(105, 117, 101, 0.7);
+  background: rgba(105, 117, 101, 0.7); /* #697565 */
 }
 
-/* Smooth blur backdrop */
-.backdrop-blur-custom {
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-/* Enhanced frosted glass effect */
-.frosted-glass {
-  background: rgba(105, 117, 101, 0.1);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(105, 117, 101, 0.2);
-}
-
-/* Smooth transitions for all interactive elements */
-* {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-/* Remove scroll lag */
-html {
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* Optimize animations for performance */
-.animate-spin,
-.animate-pulse,
-.animate-bounce {
-  will-change: transform;
-}
-
-/* Enhanced button hover effects */
+/* NO ANIMATIONS - Instant transitions only */
 button {
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: none !important;
 }
 
 button:hover {
-  transform: translateY(-1px);
+  transform: none !important;
 }
 
 button:active {
-  transform: translateY(0);
+  transform: none !important;
+}
+
+/* Remove all motion classes */
+.animate-spin,
+.animate-pulse,
+.animate-bounce,
+.fade-in-up,
+.slide-in-right,
+.slide-in-left,
+.smooth-scale,
+.logo-float {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Instant visibility for performance */
+.backdrop-blur-custom {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+.frosted-glass {
+  background: rgba(105, 117, 101, 0.1); /* #697565 */
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: 1px solid rgba(105, 117, 101, 0.2);
 }

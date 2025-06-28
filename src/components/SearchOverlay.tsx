@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { X, Search, TrendingUp } from 'lucide-react';
 import { searchProducts, getLatestProducts, Product } from '@/lib/product';
 import { useAuth } from '@/contexts/AuthContext';
@@ -122,170 +121,154 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ isOpen, onClose }) => {
     setSearchQuery(term);
   };
 
+  if (!isOpen) return null;
+
   return (
-    <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.3 }}
-          className="fixed inset-0 z-50"
-          style={{ backgroundColor: 'rgb(57, 62, 70)' }}
-        >
-          <div className="min-h-screen">
-            {/* Header */}
-            <div className="border-b border-[rgb(136,136,136)] p-6" style={{ backgroundColor: 'rgb(34, 40, 49)' }}>
-              <div className="max-w-4xl mx-auto flex items-center justify-between">
-                <div className="flex-1 mr-8">
-                  <div className="relative">
-                    <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[rgb(176,176,176)]" size={20} />
-                    <input
-                      id="search-input"
-                      type="text"
-                      placeholder="Search for products..."
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                      className="w-full pl-12 pr-4 py-4 text-lg border border-[rgb(136,136,136)] focus:outline-none focus:ring-2 focus:ring-[rgb(136,136,136)] rounded-lg text-[rgb(223,208,184)] placeholder-[rgb(176,176,176)] frosted-glass"
-                      style={{ backgroundColor: 'rgb(34, 40, 49)' }}
-                    />
-                  </div>
-                </div>
-                
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={onClose}
-                  className="p-2 hover:bg-[rgb(34,40,49)] rounded-full transition-colors text-[rgb(223,208,184)]"
-                >
-                  <X size={24} />
-                </motion.button>
+    <div
+      className="fixed inset-0 z-50"
+      style={{ backgroundColor: 'rgb(60, 61, 55)' }} // #3C3D37 - Main Background
+    >
+      <div className="min-h-screen">
+        {/* Header */}
+        <div className="border-b border-[rgb(105,117,101)] p-6" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
+          <div className="max-w-4xl mx-auto flex items-center justify-between">
+            <div className="flex-1 mr-8">
+              <div className="relative">
+                <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-[rgb(105,117,101)]" size={20} />
+                <input
+                  id="search-input"
+                  type="text"
+                  placeholder="Search for products..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full pl-12 pr-4 py-4 text-lg border border-[rgb(105,117,101)] focus:outline-none focus:ring-2 focus:ring-[rgb(105,117,101)] rounded-lg text-[rgb(236,223,204)] placeholder-[rgb(105,117,101)]"
+                  style={{ backgroundColor: 'rgb(60, 61, 55)' }} // #3C3D37 - Input Background
+                />
               </div>
             </div>
-
-            {/* Content */}
-            <div className="max-w-4xl mx-auto p-6">
-              {/* Loading */}
-              {isLoading && (
-                <div className="flex justify-center py-8">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[rgb(223,208,184)]"></div>
-                </div>
-              )}
-
-              {/* Search Results */}
-              {searchResults.length > 0 && !isLoading && (
-                <div className="mb-8">
-                  <h3 className="text-lg font-medium mb-4 text-[rgb(223,208,184)]">Search Results</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {searchResults.map((product) => (
-                      <motion.div
-                        key={product.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        whileHover={{ y: -5, scale: 1.02 }}
-                        className="cursor-pointer group"
-                        onClick={() => handleProductClick(product)}
-                      >
-                        <div className="aspect-square relative mb-2 overflow-hidden rounded-lg border border-[rgb(136,136,136)]">
-                          <img
-                            src={product.imageURL}
-                            alt={product.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                        <h4 className="font-medium text-sm text-[rgb(223,208,184)]">{product.name}</h4>
-                        <p className="text-[rgb(176,176,176)] text-sm">₹{product.price}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Trending Searches */}
-              {!searchQuery && (
-                <div className="mb-8">
-                  <h3 className="text-lg font-medium mb-4 text-[rgb(223,208,184)] flex items-center">
-                    <TrendingUp className="mr-2" size={20} />
-                    Trending Searches
-                  </h3>
-                  <div className="flex flex-wrap gap-2">
-                    {trendingSearches.map((search, index) => (
-                      <motion.button
-                        key={index}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => handleTrendingClick(search)}
-                        className="px-4 py-2 border border-[rgb(136,136,136)] hover:bg-[rgb(34,40,49)] rounded-full text-sm transition-colors text-[rgb(223,208,184)]"
-                        style={{ backgroundColor: 'rgb(57, 62, 70)' }}
-                      >
-                        {search}
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* Recent Searches */}
-              {recentSearches.length > 0 && !searchQuery && (
-                <div className="mb-8">
-                  <h3 className="text-lg font-medium mb-4 text-[rgb(223,208,184)]">Recent Searches</h3>
-                  <div className="flex flex-wrap gap-2">
-                    {recentSearches.map((search, index) => (
-                      <motion.button
-                        key={index}
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 0.95 }}
-                        onClick={() => setSearchQuery(search)}
-                        className="px-4 py-2 border border-[rgb(136,136,136)] hover:bg-[rgb(34,40,49)] rounded-full text-sm transition-colors text-[rgb(223,208,184)]"
-                        style={{ backgroundColor: 'rgb(57, 62, 70)' }}
-                      >
-                        {search}
-                      </motion.button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* New This Season */}
-              {suggestedProducts.length > 0 && !searchQuery && (
-                <div>
-                  <h3 className="text-lg font-medium mb-4 text-[rgb(223,208,184)]">New This Season</h3>
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {suggestedProducts.map((product) => (
-                      <motion.div
-                        key={product.id}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        whileHover={{ y: -5, scale: 1.02 }}
-                        className="cursor-pointer group"
-                        onClick={() => handleProductClick(product)}
-                      >
-                        <div className="aspect-square relative mb-2 overflow-hidden rounded-lg border border-[rgb(136,136,136)]">
-                          <img
-                            src={product.imageURL}
-                            alt={product.name}
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                        <h4 className="font-medium text-sm text-[rgb(223,208,184)]">{product.name}</h4>
-                        <p className="text-[rgb(176,176,176)] text-sm">₹{product.price}</p>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* No Results */}
-              {searchQuery && searchResults.length === 0 && !isLoading && (
-                <div className="text-center py-8">
-                  <p className="text-[rgb(176,176,176)]">No products found for "{searchQuery}"</p>
-                </div>
-              )}
-            </div>
+            
+            <button
+              onClick={onClose}
+              className="p-2 hover:bg-[rgb(60,61,55)] rounded-full text-[rgb(236,223,204)]"
+            >
+              <X size={24} />
+            </button>
           </div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+        </div>
+
+        {/* Content */}
+        <div className="max-w-4xl mx-auto p-6">
+          {/* Loading */}
+          {isLoading && (
+            <div className="flex justify-center py-8">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[rgb(236,223,204)]"></div>
+            </div>
+          )}
+
+          {/* Search Results */}
+          {searchResults.length > 0 && !isLoading && (
+            <div className="mb-8">
+              <h3 className="text-lg font-medium mb-4 text-[rgb(236,223,204)]">Search Results</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {searchResults.map((product) => (
+                  <div
+                    key={product.id}
+                    className="cursor-pointer group"
+                    onClick={() => handleProductClick(product)}
+                  >
+                    <div className="aspect-square relative mb-2 overflow-hidden rounded-lg border border-[rgb(105,117,101)]">
+                      <img
+                        src={product.imageURL}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-105"
+                        style={{ transition: 'transform 0.3s ease' }}
+                      />
+                    </div>
+                    <h4 className="font-medium text-sm text-[rgb(236,223,204)]">{product.name}</h4>
+                    <p className="text-[rgb(105,117,101)] text-sm">₹{product.price}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Trending Searches */}
+          {!searchQuery && (
+            <div className="mb-8">
+              <h3 className="text-lg font-medium mb-4 text-[rgb(236,223,204)] flex items-center">
+                <TrendingUp className="mr-2" size={20} />
+                Trending Searches
+              </h3>
+              <div className="flex flex-wrap gap-2">
+                {trendingSearches.map((search, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleTrendingClick(search)}
+                    className="px-4 py-2 border border-[rgb(105,117,101)] hover:bg-[rgb(24,28,20)] rounded-full text-sm text-[rgb(236,223,204)]"
+                    style={{ backgroundColor: 'rgb(60, 61, 55)' }}
+                  >
+                    {search}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* Recent Searches */}
+          {recentSearches.length > 0 && !searchQuery && (
+            <div className="mb-8">
+              <h3 className="text-lg font-medium mb-4 text-[rgb(236,223,204)]">Recent Searches</h3>
+              <div className="flex flex-wrap gap-2">
+                {recentSearches.map((search, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setSearchQuery(search)}
+                    className="px-4 py-2 border border-[rgb(105,117,101)] hover:bg-[rgb(24,28,20)] rounded-full text-sm text-[rgb(236,223,204)]"
+                    style={{ backgroundColor: 'rgb(60, 61, 55)' }}
+                  >
+                    {search}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* New This Season */}
+          {suggestedProducts.length > 0 && !searchQuery && (
+            <div>
+              <h3 className="text-lg font-medium mb-4 text-[rgb(236,223,204)]">New This Season</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {suggestedProducts.map((product) => (
+                  <div
+                    key={product.id}
+                    className="cursor-pointer group"
+                    onClick={() => handleProductClick(product)}
+                  >
+                    <div className="aspect-square relative mb-2 overflow-hidden rounded-lg border border-[rgb(105,117,101)]">
+                      <img
+                        src={product.imageURL}
+                        alt={product.name}
+                        className="w-full h-full object-cover group-hover:scale-105"
+                        style={{ transition: 'transform 0.3s ease' }}
+                      />
+                    </div>
+                    <h4 className="font-medium text-sm text-[rgb(236,223,204)]">{product.name}</h4>
+                    <p className="text-[rgb(105,117,101)] text-sm">₹{product.price}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* No Results */}
+          {searchQuery && searchResults.length === 0 && !isLoading && (
+            <div className="text-center py-8">
+              <p className="text-[rgb(105,117,101)]">No products found for "{searchQuery}"</p>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
