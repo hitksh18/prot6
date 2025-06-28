@@ -108,16 +108,16 @@ const ChatWidget: React.FC = () => {
 
   return (
     <>
-      {/* Chat Button - Enhanced with R.png image and consistent text */}
+      {/* Chat Button - Using the new uploaded image */}
       <button
         onClick={toggleChat}
         className="fixed bottom-6 right-6 z-40 px-6 py-3 rounded-full shadow-lg flex items-center space-x-3 hover:bg-[rgba(105,117,101,0.2)] transition-colors"
         style={{ backgroundColor: 'rgba(105, 117, 101, 0.1)' }}
       >
         <div className="w-8 h-8 relative rounded-full overflow-hidden bg-[rgb(236,223,204)] flex items-center justify-center">
-          {/* Use R.png image - same size always */}
+          {/* Using the new uploaded image */}
           <img
-            src="/R.png"
+            src="/lovable-uploads/ChatGPT_Image_Jun_27__2025__12_03_44_PM-removebg-preview copy.png"
             alt="RARITONE Chat"
             className="w-6 h-6 object-contain"
           />
@@ -139,7 +139,7 @@ const ChatWidget: React.FC = () => {
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-[rgb(236,223,204)] rounded-full flex items-center justify-center">
                 <img
-                  src="/R.png"
+                  src="/lovable-uploads/ChatGPT_Image_Jun_27__2025__12_03_44_PM-removebg-preview copy.png"
                   alt="RARITONE"
                   className="w-6 h-6 object-contain"
                 />
