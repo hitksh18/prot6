@@ -61,12 +61,12 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
 
   return (
     <>
-      {/* NAVBAR - Restored with smooth slide animation */}
+      {/* NAVBAR - Enhanced z-index management */}
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: isVisible ? 0 : -100 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="fixed top-0 left-0 right-0 z-50"
+        className={`fixed top-0 left-0 right-0 ${isMenuOpen ? 'z-30' : 'z-50'}`} // Lower z-index when menu is open
         style={{ 
           backgroundColor: 'rgb(105, 117, 101)', // #697565 - Navbar Background
           borderBottom: '1px solid rgb(236, 223, 204)' // #ECDFCC - Bottom Border
@@ -74,43 +74,49 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Left - Menu with 16px spacing and animated hamburger */}
-            <div className="flex items-center" style={{ marginRight: '16px' }}>
+            {/* Left - Menu with enhanced z-index for animation visibility */}
+            <div className="flex items-center relative z-60" style={{ marginRight: '16px' }}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={handleMenuClick}
-                className="flex items-center space-x-2 text-[rgb(236,223,204)] hover:text-[rgb(60,61,55)] transition-colors"
+                className="flex items-center space-x-2 text-[rgb(236,223,204)] hover:text-[rgb(60,61,55)] transition-colors relative z-60"
               >
-                {/* Animated hamburger to cross */}
-                <div className="relative w-5 h-5 flex flex-col justify-center items-center">
+                {/* Enhanced animated hamburger to cross - Higher z-index */}
+                <div className="relative w-6 h-6 flex flex-col justify-center items-center z-60">
                   <motion.span
                     animate={{
                       rotate: isMenuOpen ? 45 : 0,
-                      y: isMenuOpen ? 0 : -3,
+                      y: isMenuOpen ? 0 : -4,
                     }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute w-5 h-0.5 bg-current"
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="absolute w-6 h-0.5 bg-current rounded-full"
+                    style={{ transformOrigin: 'center' }}
                   />
                   <motion.span
                     animate={{
                       opacity: isMenuOpen ? 0 : 1,
+                      scale: isMenuOpen ? 0 : 1,
                     }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute w-5 h-0.5 bg-current"
+                    transition={{ duration: 0.2, ease: "easeInOut" }}
+                    className="absolute w-6 h-0.5 bg-current rounded-full"
                   />
                   <motion.span
                     animate={{
                       rotate: isMenuOpen ? -45 : 0,
-                      y: isMenuOpen ? 0 : 3,
+                      y: isMenuOpen ? 0 : 4,
                     }}
-                    transition={{ duration: 0.3 }}
-                    className="absolute w-5 h-0.5 bg-current"
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="absolute w-6 h-0.5 bg-current rounded-full"
+                    style={{ transformOrigin: 'center' }}
                   />
                 </div>
                 <motion.span 
-                  className="text-sm font-medium"
-                  animate={{ opacity: 1 }}
+                  className="text-sm font-medium relative z-60"
+                  animate={{ 
+                    opacity: 1,
+                    color: isMenuOpen ? 'rgb(236,223,204)' : 'rgb(236,223,204)'
+                  }}
                   transition={{ duration: 0.3 }}
                 >
                   {isMenuOpen ? 'Close' : 'Menu'}
@@ -181,7 +187,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
         </div>
       </motion.nav>
 
-      {/* Left Menu Sidebar - Enhanced with smooth animations */}
+      {/* Left Menu Sidebar - Enhanced z-index to be above navbar */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
@@ -199,7 +205,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
               style={{ backgroundColor: 'rgb(24, 28, 20)' }} // #181C14 - Sidebar BG
-              className="fixed left-0 top-0 h-full w-80 z-50 shadow-2xl"
+              className="fixed left-0 top-0 h-full w-80 z-50 shadow-2xl" // z-50 to be above navbar
             >
               <div className="p-8">
                 <div className="flex justify-between items-center mb-8">
@@ -210,17 +216,19 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
                     onClick={() => setIsMenuOpen(false)}
                     className="text-[rgb(236,223,204)] hover:text-[rgb(105,117,101)] transition-colors"
                   >
-                    {/* Animated X icon */}
+                    {/* Enhanced animated X icon */}
                     <div className="relative w-6 h-6 flex flex-col justify-center items-center">
                       <motion.span
                         initial={{ rotate: 0 }}
                         animate={{ rotate: 45 }}
-                        className="absolute w-6 h-0.5 bg-current"
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="absolute w-6 h-0.5 bg-current rounded-full"
                       />
                       <motion.span
                         initial={{ rotate: 0 }}
                         animate={{ rotate: -45 }}
-                        className="absolute w-6 h-0.5 bg-current"
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        className="absolute w-6 h-0.5 bg-current rounded-full"
                       />
                     </div>
                   </motion.button>
@@ -258,7 +266,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
         )}
       </AnimatePresence>
 
-      {/* Right Profile Sidebar - Smooth fade animation */}
+      {/* Right Profile Sidebar - Enhanced z-index management */}
       <AnimatePresence>
         {isProfileOpen && user && (
           <>
