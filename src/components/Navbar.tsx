@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Search, ShoppingBag, User, Menu, X, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -12,7 +12,7 @@ interface NavbarProps {
   onCartOpen: () => void;
 }
 
-const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
+const Navbar: React.FC<NavbarProps> = memo(({ onSearchOpen, onCartOpen }) => {
   const [isVisible, setIsVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
@@ -473,6 +473,8 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
       />
     </>
   );
-};
+});
+
+Navbar.displayName = 'Navbar';
 
 export default Navbar;
