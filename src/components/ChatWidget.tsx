@@ -117,7 +117,7 @@ const ChatWidget: React.FC = () => {
         <div className="w-8 h-8 relative rounded-full overflow-hidden bg-[rgb(236,223,204)] flex items-center justify-center">
           {/* Use R.png image instead of icon */}
           <img
-            src="/lovable-uploads/image.png"
+            src="R.png"
             alt="RARITONE Chat"
             className="w-6 h-6 object-contain"
           />
