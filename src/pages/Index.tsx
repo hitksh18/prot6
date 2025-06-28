@@ -57,14 +57,14 @@ const Index = () => {
   ];
 
   return (
-    <div className="min-h-screen text-[rgb(223,208,184)]" style={{ backgroundColor: 'rgb(57, 62, 70)' }}>
+    <div className="min-h-screen text-[rgb(236,223,204)]" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
       {/* Navigation */}
       <Navbar 
         onSearchOpen={() => setIsSearchOpen(true)}
         onCartOpen={() => setIsCartOpen(true)}
       />
 
-      {/* Hero Section */}
+      {/* Hero Section - Fixed overlap issues */}
       <div className="relative h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image with Overlay */}
         <div className="absolute inset-0 z-0">
@@ -73,13 +73,13 @@ const Index = () => {
             alt="Fashion Model in RARITONE Collection"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(34, 40, 49, 0.5)' }} />
+          <div className="absolute inset-0" style={{ backgroundColor: 'rgba(24, 28, 20, 0.5)' }} />
         </div>
 
         {/* Logo - Made Bigger */}
         <motion.div
           style={{ y: logoY, opacity: logoOpacity, scale: logoScale }}
-          className="relative z-10 text-center"
+          className="relative z-10 text-center px-4"
         >
           <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
@@ -92,7 +92,7 @@ const Index = () => {
               alt="RARITONE"
               width={600}
               height={200}
-              className="mx-auto mb-6"
+              className="mx-auto mb-8"
             />
           </motion.div>
 
@@ -100,7 +100,7 @@ const Index = () => {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.8 }}
-            className="text-xl font-light mb-8 text-[rgb(223,208,184)]"
+            className="text-xl font-light mb-12 text-[rgb(236,223,204)]"
           >
             Fashion Meets Technology
           </motion.p>
@@ -109,12 +109,12 @@ const Index = () => {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6"
+            className="flex flex-col sm:flex-row items-center justify-center space-y-6 sm:space-y-0 sm:space-x-8 mb-12"
           >
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(34, 40, 49, 0.2)' }}
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(105, 117, 101, 0.2)' }}
               whileTap={{ scale: 0.95 }}
-              className="bg-transparent text-[rgb(223,208,184)] border border-[rgb(136,136,136)] px-8 py-3 font-medium hover:bg-[rgba(34,40,49,0.3)] transition-all duration-300 flex items-center space-x-2 rounded-full"
+              className="bg-transparent text-[rgb(236,223,204)] border border-[rgb(105,117,101)] px-8 py-4 font-medium hover:bg-[rgba(105,117,101,0.3)] transition-all duration-300 flex items-center space-x-3 rounded-full min-w-[200px] justify-center"
               onClick={() => navigate('/scan')}
             >
               <Camera size={20} />
@@ -122,9 +122,9 @@ const Index = () => {
             </motion.button>
             
             <motion.button
-              whileHover={{ scale: 1.05, backgroundColor: 'rgba(34, 40, 49, 0.2)' }}
+              whileHover={{ scale: 1.05, backgroundColor: 'rgba(105, 117, 101, 0.2)' }}
               whileTap={{ scale: 0.95 }}
-              className="bg-transparent text-[rgb(223,208,184)] border border-[rgb(136,136,136)] px-8 py-3 font-medium hover:bg-[rgba(34,40,49,0.3)] transition-all duration-300 flex items-center space-x-2 rounded-full"
+              className="bg-transparent text-[rgb(236,223,204)] border border-[rgb(105,117,101)] px-8 py-4 font-medium hover:bg-[rgba(105,117,101,0.3)] transition-all duration-300 flex items-center space-x-3 rounded-full min-w-[200px] justify-center"
               onClick={() => navigate('/catalog')}
             >
               <ShoppingBag size={20} />
@@ -136,21 +136,10 @@ const Index = () => {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.1, duration: 0.8 }}
-            className="text-sm text-[rgb(176,176,176)] mt-8 max-w-md mx-auto"
+            className="text-sm text-[rgb(105,117,101)] max-w-md mx-auto"
           >
             This site uses webcam access to enable AI-powered try-ons. Your camera data is never stored or shared.
           </motion.p>
-        </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-[rgb(176,176,176)]"
-        >
-          <div className="w-6 h-10 border-2 border-[rgb(136,136,136)] rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-[rgb(176,176,176)] rounded-full mt-2" />
-          </div>
         </motion.div>
       </div>
 
@@ -161,7 +150,7 @@ const Index = () => {
         transition={{ duration: 1 }}
         viewport={{ once: true }}
         className="py-20 px-4"
-        style={{ backgroundColor: 'rgb(57, 62, 70)' }}
+        style={{ backgroundColor: 'rgb(60, 61, 55)' }}
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -171,11 +160,11 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-light mb-4 text-[rgb(223,208,184)] flex items-center justify-center">
+            <h2 className="text-4xl font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
               <Sparkles className="mr-3" size={32} />
               New Arrivals
             </h2>
-            <p className="text-[rgb(176,176,176)] max-w-2xl mx-auto">
+            <p className="text-[rgb(105,117,101)] max-w-2xl mx-auto">
               Discover our latest collections, meticulously crafted and designed for the modern luxury connoisseur.
             </p>
           </motion.div>
@@ -190,10 +179,10 @@ const Index = () => {
                 transition={{ delay: index * 0.2, duration: 0.8 }}
                 viewport={{ once: true }}
                 className="group cursor-pointer"
-                style={{ backgroundColor: 'rgb(34, 40, 49)' }}
+                style={{ backgroundColor: 'rgb(24, 28, 20)' }}
                 onClick={() => navigate('/catalog')}
               >
-                <div className="rounded-lg shadow-md border border-[rgb(136,136,136)] overflow-hidden">
+                <div className="rounded-lg shadow-md border border-[rgb(105,117,101)] overflow-hidden">
                   <div className="aspect-[3/4] relative overflow-hidden">
                     <img
                       src={item.image}
@@ -201,14 +190,14 @@ const Index = () => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                     />
                     <div className="absolute top-4 left-4">
-                      <span className="bg-[rgb(223,208,184)] text-[rgb(34,40,49)] px-2 py-1 text-xs font-medium rounded">
+                      <span className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] px-2 py-1 text-xs font-medium rounded">
                         {item.tag}
                       </span>
                     </div>
                   </div>
                   <div className="p-4">
-                    <h3 className="text-lg font-medium mb-2 text-[rgb(223,208,184)]">{item.name}</h3>
-                    <p className="text-[rgb(176,176,176)] text-sm">From {item.price}</p>
+                    <h3 className="text-lg font-medium mb-2 text-[rgb(236,223,204)]">{item.name}</h3>
+                    <p className="text-[rgb(105,117,101)] text-sm">From {item.price}</p>
                   </div>
                 </div>
               </motion.div>
@@ -224,7 +213,7 @@ const Index = () => {
         transition={{ duration: 1 }}
         viewport={{ once: true }}
         className="py-20 px-4"
-        style={{ backgroundColor: 'rgb(34, 40, 49)' }}
+        style={{ backgroundColor: 'rgb(24, 28, 20)' }}
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -234,11 +223,11 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-light mb-4 text-[rgb(223,208,184)] flex items-center justify-center">
+            <h2 className="text-4xl font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
               <TrendingUp className="mr-3" size={32} />
               Shop by Category
             </h2>
-            <p className="text-[rgb(176,176,176)] max-w-2xl mx-auto">
+            <p className="text-[rgb(105,117,101)] max-w-2xl mx-auto">
               Explore our diverse range of fashion categories, each carefully curated for your unique style.
             </p>
           </motion.div>
@@ -255,7 +244,7 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => navigate('/catalog')}
               >
-                <div className="rounded-lg shadow-md border border-[rgb(136,136,136)] overflow-hidden" style={{ backgroundColor: 'rgb(57, 62, 70)' }}>
+                <div className="rounded-lg shadow-md border border-[rgb(105,117,101)] overflow-hidden" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
                   <div className="aspect-square relative overflow-hidden">
                     <img
                       src={category.image}
@@ -265,8 +254,8 @@ const Index = () => {
                     <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
                   </div>
                   <div className="p-4 text-center">
-                    <h3 className="text-lg font-medium mb-1 text-[rgb(223,208,184)]">{category.name}</h3>
-                    <p className="text-[rgb(176,176,176)] text-sm">{category.count}</p>
+                    <h3 className="text-lg font-medium mb-1 text-[rgb(236,223,204)]">{category.name}</h3>
+                    <p className="text-[rgb(105,117,101)] text-sm">{category.count}</p>
                   </div>
                 </div>
               </motion.div>
@@ -282,7 +271,7 @@ const Index = () => {
         transition={{ duration: 1 }}
         viewport={{ once: true }}
         className="py-20 px-4"
-        style={{ backgroundColor: 'rgb(57, 62, 70)' }}
+        style={{ backgroundColor: 'rgb(60, 61, 55)' }}
       >
         <div className="max-w-7xl mx-auto">
           <motion.div
@@ -292,11 +281,11 @@ const Index = () => {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-light mb-4 text-[rgb(223,208,184)] flex items-center justify-center">
+            <h2 className="text-4xl font-light mb-4 text-[rgb(236,223,204)] flex items-center justify-center">
               <Star className="mr-3" size={32} />
               Best Picks
             </h2>
-            <p className="text-[rgb(176,176,176)] max-w-2xl mx-auto">
+            <p className="text-[rgb(105,117,101)] max-w-2xl mx-auto">
               Our most popular items, loved by customers worldwide for their exceptional quality and style.
             </p>
           </motion.div>
@@ -335,7 +324,7 @@ const Index = () => {
                 className="group cursor-pointer"
                 onClick={() => navigate('/catalog')}
               >
-                <div className="rounded-lg shadow-md border border-[rgb(136,136,136)] overflow-hidden" style={{ backgroundColor: 'rgb(34, 40, 49)' }}>
+                <div className="rounded-lg shadow-md border border-[rgb(105,117,101)] overflow-hidden" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
                   <div className="aspect-[3/4] relative overflow-hidden">
                     <img
                       src={item.image}
@@ -346,13 +335,13 @@ const Index = () => {
                   </div>
                   <div className="p-4">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-lg font-medium text-[rgb(223,208,184)]">{item.title}</h3>
+                      <h3 className="text-lg font-medium text-[rgb(236,223,204)]">{item.title}</h3>
                       <div className="flex items-center space-x-1">
                         <Star size={16} className="text-yellow-400 fill-current" />
-                        <span className="text-[rgb(176,176,176)] text-sm">{item.rating}</span>
+                        <span className="text-[rgb(105,117,101)] text-sm">{item.rating}</span>
                       </div>
                     </div>
-                    <p className="text-[rgb(176,176,176)] text-sm">From {item.price}</p>
+                    <p className="text-[rgb(105,117,101)] text-sm">From {item.price}</p>
                   </div>
                 </div>
               </motion.div>
@@ -361,18 +350,18 @@ const Index = () => {
         </div>
       </motion.section>
 
-      {/* Footer Section */}
+      {/* Footer Section - Enhanced with larger logo */}
       <motion.footer
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         transition={{ duration: 1 }}
         viewport={{ once: true }}
-        className="py-16 px-4 border-t border-[rgb(136,136,136)]"
-        style={{ backgroundColor: 'rgb(34, 40, 49)' }}
+        className="py-16 px-4 border-t border-[rgb(105,117,101)]"
+        style={{ backgroundColor: 'rgb(24, 28, 20)' }}
       >
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {/* Brand Section */}
+            {/* Brand Section - Larger logo */}
             <div className="md:col-span-2">
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
@@ -383,11 +372,11 @@ const Index = () => {
                 <img
                   src="/IMG-20250305-WA0003-removebg-preview.png"
                   alt="RARITONE"
-                  className="h-16 w-auto mb-4"
+                  className="h-24 w-auto mb-4"
                 />
-                <p className="text-[rgb(176,176,176)] max-w-md leading-relaxed">
+                <p className="text-[rgb(105,117,101)] max-w-md leading-relaxed">
                   Revolutionizing fashion with AI-powered body scanning technology. 
-                  Experience perfect fit and personalized style recommendations.
+                  Experience perfect fit and personalized style recommendations across India.
                 </p>
               </motion.div>
             </div>
@@ -400,17 +389,17 @@ const Index = () => {
                 transition={{ duration: 0.6, delay: 0.1 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-lg font-semibold text-[rgb(223,208,184)] mb-4">Quick Links</h3>
+                <h3 className="text-lg font-semibold text-[rgb(236,223,204)] mb-4">Quick Links</h3>
                 <ul className="space-y-2">
-                  <li><a href="#" className="text-[rgb(176,176,176)] hover:text-[rgb(223,208,184)] transition-colors">About Us</a></li>
-                  <li><a href="#" className="text-[rgb(176,176,176)] hover:text-[rgb(223,208,184)] transition-colors">Privacy Policy</a></li>
-                  <li><a href="#" className="text-[rgb(176,176,176)] hover:text-[rgb(223,208,184)] transition-colors">Returns</a></li>
-                  <li><a href="#" className="text-[rgb(176,176,176)] hover:text-[rgb(223,208,184)] transition-colors">Contact</a></li>
+                  <li><a href="/quick-links" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] transition-colors">About Us</a></li>
+                  <li><a href="/quick-links" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] transition-colors">Privacy Policy</a></li>
+                  <li><a href="/quick-links" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] transition-colors">Returns</a></li>
+                  <li><a href="/quick-links" className="text-[rgb(105,117,101)] hover:text-[rgb(236,223,204)] transition-colors">Contact</a></li>
                 </ul>
               </motion.div>
             </div>
 
-            {/* Contact Info */}
+            {/* Contact Info - India specific */}
             <div>
               <motion.div
                 initial={{ y: 20, opacity: 0 }}
@@ -418,19 +407,19 @@ const Index = () => {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 viewport={{ once: true }}
               >
-                <h3 className="text-lg font-semibold text-[rgb(223,208,184)] mb-4">Contact</h3>
+                <h3 className="text-lg font-semibold text-[rgb(236,223,204)] mb-4">Contact</h3>
                 <div className="space-y-3">
                   <div className="flex items-center space-x-3">
-                    <Mail size={16} className="text-[rgb(176,176,176)]" />
-                    <span className="text-[rgb(176,176,176)]">hello@raritone.com</span>
+                    <Mail size={16} className="text-[rgb(105,117,101)]" />
+                    <span className="text-[rgb(105,117,101)]">hello@raritone.in</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <Phone size={16} className="text-[rgb(176,176,176)]" />
-                    <span className="text-[rgb(176,176,176)]">+91 98765 43210</span>
+                    <Phone size={16} className="text-[rgb(105,117,101)]" />
+                    <span className="text-[rgb(105,117,101)]">+91 98765 43210</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <MapPin size={16} className="text-[rgb(176,176,176)]" />
-                    <span className="text-[rgb(176,176,176)]">Mumbai, India</span>
+                    <MapPin size={16} className="text-[rgb(105,117,101)]" />
+                    <span className="text-[rgb(105,117,101)]">Mumbai, India</span>
                   </div>
                 </div>
               </motion.div>
@@ -442,10 +431,10 @@ const Index = () => {
             whileInView={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.6, delay: 0.3 }}
             viewport={{ once: true }}
-            className="border-t border-[rgb(136,136,136)] mt-12 pt-8 text-center"
+            className="border-t border-[rgb(105,117,101)] mt-12 pt-8 text-center"
           >
-            <p className="text-[rgb(176,176,176)]">
-              © 2025 RARITONE. All rights reserved. | Powered by AI Fashion Technology
+            <p className="text-[rgb(105,117,101)]">
+              © 2025 RARITONE. All rights reserved. | Powered by AI Fashion Technology | Made in India
             </p>
           </motion.div>
         </div>

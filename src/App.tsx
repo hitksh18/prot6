@@ -13,6 +13,7 @@ import Scan from "./pages/Scan";
 import Settings from "./pages/Settings";
 import Orders from "./pages/Orders";
 import Wishlist from "./pages/Wishlist";
+import QuickLinks from "./pages/QuickLinks";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/settings" element={<Settings />} />
             <Route path="/orders" element={<Orders />} />
             <Route path="/wishlist" element={<Wishlist />} />
+            <Route path="/quick-links" element={<QuickLinks />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowLeft, Moon, Sun, Bell, Shield, User, MapPin } from 'lucide-react';
+import { ArrowLeft, Bell, Shield, User, MapPin, Edit } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useNavigate } from 'react-router-dom';
+import Navbar from '@/components/Navbar';
 
 const Settings = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const [isDarkMode, setIsDarkMode] = useState(
-    localStorage.getItem('theme') === 'dark'
-  );
   const [notifications, setNotifications] = useState({
     orderUpdates: true,
     promotions: false,
@@ -28,21 +26,12 @@ const Settings = () => {
     {
       id: 1,
       type: 'Home',
-      address: '123 Main St, City, State 12345',
-      isDefault: true
+      address: '123 Main St, Mumbai, Maharashtra 400001',
+      isDefault: true,
+      isEditing: false
     }
   ]);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    if (!isDarkMode) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-    }
-  };
+  const [editingAddress, setEditingAddress] = useState<number | null>(null);
 
   const handleSavePersonalInfo = () => {
     // Implement save logic
@@ -54,96 +43,103 @@ const Settings = () => {
     alert('Password change functionality would be implemented here');
   };
 
+  const handleEditAddress = (addressId: number) => {
+    setEditingAddress(addressId);
+    setAddresses(prev => prev.map(addr => 
+      addr.id === addressId ? { ...addr, isEditing: true } : addr
+    ));
+  };
+
+  const handleSaveAddress = (addressId: number) => {
+    setEditingAddress(null);
+    setAddresses(prev => prev.map(addr => 
+      addr.id === addressId ? { ...addr, isEditing: false } : addr
+    ));
+    alert('Address updated successfully!');
+  };
+
+  const handleAddressChange = (addressId: number, newAddress: string) => {
+    setAddresses(prev => prev.map(addr => 
+      addr.id === addressId ? { ...addr, address: newAddress } : addr
+    ));
+  };
+
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 pt-20">
-      <div className="max-w-4xl mx-auto px-4 py-8">
-        {/* Header */}
-        <div className="flex items-center mb-8">
-          <button
-            onClick={() => navigate(-1)}
-            className="mr-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-full transition-colors"
-          >
-            <ArrowLeft size={24} className="text-gray-900 dark:text-white" />
-          </button>
-          <div>
-            <h1 className="text-3xl font-semibold text-gray-900 dark:text-white">Settings</h1>
-            <p className="text-gray-600 dark:text-gray-300">Manage your account preferences</p>
+    <div className="min-h-screen" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
+      {/* Navbar */}
+      <div className="fixed top-0 left-0 right-0 z-50" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+            {/* Back Button */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.9 }}
+              onClick={() => navigate(-1)}
+              className="p-2 hover:bg-[rgb(60,61,55)] rounded-full transition-colors"
+            >
+              <ArrowLeft size={24} className="text-[rgb(236,223,204)]" />
+            </motion.button>
+
+            {/* Settings Title */}
+            <h1 className="text-xl font-semibold text-[rgb(236,223,204)]">Settings</h1>
+
+            {/* Spacer for balance */}
+            <div className="w-10"></div>
           </div>
         </div>
+      </div>
 
+      <div className="pt-20 max-w-4xl mx-auto px-4 py-8">
         <div className="space-y-6">
-          {/* Appearance */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6"
-          >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-              {isDarkMode ? <Moon className="mr-2" size={20} /> : <Sun className="mr-2" size={20} />}
-              Appearance
-            </h2>
-            
-            <div className="flex items-center justify-between">
-              <div>
-                <Label className="text-gray-900 dark:text-white">Dark Mode</Label>
-                <p className="text-sm text-gray-600 dark:text-gray-300">Toggle between light and dark themes</p>
-              </div>
-              <Switch
-                checked={isDarkMode}
-                onCheckedChange={toggleDarkMode}
-              />
-            </div>
-          </motion.div>
-
           {/* Personal Information */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6"
+            className="rounded-lg shadow-sm p-6 border border-[rgb(105,117,101)]"
+            style={{ backgroundColor: 'rgb(24, 28, 20)' }}
           >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <h2 className="text-xl font-semibold text-[rgb(236,223,204)] mb-4 flex items-center">
               <User className="mr-2" size={20} />
               Personal Information
             </h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               <div>
-                <Label htmlFor="name" className="text-gray-900 dark:text-white">Full Name</Label>
+                <Label htmlFor="name" className="text-[rgb(236,223,204)]">Full Name</Label>
                 <Input
                   id="name"
                   value={personalInfo.name}
                   onChange={(e) => setPersonalInfo({...personalInfo, name: e.target.value})}
-                  className="mt-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  className="mt-1 bg-[rgb(60,61,55)] border-[rgb(105,117,101)] text-[rgb(236,223,204)]"
                 />
               </div>
               
               <div>
-                <Label htmlFor="email" className="text-gray-900 dark:text-white">Email</Label>
+                <Label htmlFor="email" className="text-[rgb(236,223,204)]">Email</Label>
                 <Input
                   id="email"
                   value={personalInfo.email}
                   disabled
-                  className="mt-1 bg-gray-50 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  className="mt-1 bg-[rgb(60,61,55)] border-[rgb(105,117,101)] text-[rgb(236,223,204)]"
                 />
               </div>
               
               <div>
-                <Label htmlFor="phone" className="text-gray-900 dark:text-white">Phone Number</Label>
+                <Label htmlFor="phone" className="text-[rgb(236,223,204)]">Phone Number</Label>
                 <Input
                   id="phone"
                   value={personalInfo.phone}
                   onChange={(e) => setPersonalInfo({...personalInfo, phone: e.target.value})}
-                  className="mt-1 dark:bg-gray-700 dark:border-gray-600 dark:text-white"
+                  className="mt-1 bg-[rgb(60,61,55)] border-[rgb(105,117,101)] text-[rgb(236,223,204)]"
                 />
               </div>
             </div>
             
             <div className="flex space-x-4">
-              <Button onClick={handleSavePersonalInfo} className="bg-black text-white hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+              <Button onClick={handleSavePersonalInfo} className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)]">
                 Save Changes
               </Button>
-              <Button onClick={handleChangePassword} variant="outline" className="dark:border-gray-600 dark:text-white dark:hover:bg-gray-700">
+              <Button onClick={handleChangePassword} variant="outline" className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]">
                 Change Password
               </Button>
             </div>
@@ -153,37 +149,79 @@ const Settings = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6"
+            transition={{ delay: 0.1 }}
+            className="rounded-lg shadow-sm p-6 border border-[rgb(105,117,101)]"
+            style={{ backgroundColor: 'rgb(24, 28, 20)' }}
           >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <h2 className="text-xl font-semibold text-[rgb(236,223,204)] mb-4 flex items-center">
               <MapPin className="mr-2" size={20} />
               Delivery Addresses
             </h2>
             
             <div className="space-y-4">
               {addresses.map((address) => (
-                <div key={address.id} className="border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                <div key={address.id} className="border border-[rgb(105,117,101)] rounded-lg p-4">
                   <div className="flex items-center justify-between">
-                    <div>
-                      <div className="flex items-center space-x-2">
-                        <span className="font-medium text-gray-900 dark:text-white">{address.type}</span>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <span className="font-medium text-[rgb(236,223,204)]">{address.type}</span>
                         {address.isDefault && (
-                          <span className="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 text-xs px-2 py-1 rounded">
+                          <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
                             Default
                           </span>
                         )}
                       </div>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm">{address.address}</p>
+                      {address.isEditing ? (
+                        <div className="space-y-2">
+                          <textarea
+                            value={address.address}
+                            onChange={(e) => handleAddressChange(address.id, e.target.value)}
+                            className="w-full px-3 py-2 border border-[rgb(105,117,101)] rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(105,117,101)] bg-[rgb(60,61,55)] text-[rgb(236,223,204)]"
+                            rows={3}
+                          />
+                          <div className="flex space-x-2">
+                            <Button 
+                              onClick={() => handleSaveAddress(address.id)}
+                              size="sm" 
+                              className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)]"
+                            >
+                              Save
+                            </Button>
+                            <Button 
+                              onClick={() => {
+                                setEditingAddress(null);
+                                setAddresses(prev => prev.map(addr => 
+                                  addr.id === address.id ? { ...addr, isEditing: false } : addr
+                                ));
+                              }}
+                              variant="outline" 
+                              size="sm" 
+                              className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]"
+                            >
+                              Cancel
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        <p className="text-[rgb(105,117,101)] text-sm">{address.address}</p>
+                      )}
                     </div>
-                    <Button variant="outline" size="sm" className="dark:border-gray-600 dark:text-white dark:hover:bg-gray-700">
-                      Edit
-                    </Button>
+                    {!address.isEditing && (
+                      <Button 
+                        onClick={() => handleEditAddress(address.id)}
+                        variant="outline" 
+                        size="sm" 
+                        className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] flex items-center space-x-1"
+                      >
+                        <Edit size={14} />
+                        <span>Edit</span>
+                      </Button>
+                    )}
                   </div>
                 </div>
               ))}
               
-              <Button variant="outline" className="w-full dark:border-gray-600 dark:text-white dark:hover:bg-gray-700">
+              <Button variant="outline" className="w-full border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]">
                 Add New Address
               </Button>
             </div>
@@ -193,10 +231,11 @@ const Settings = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6"
+            transition={{ delay: 0.2 }}
+            className="rounded-lg shadow-sm p-6 border border-[rgb(105,117,101)]"
+            style={{ backgroundColor: 'rgb(24, 28, 20)' }}
           >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <h2 className="text-xl font-semibold text-[rgb(236,223,204)] mb-4 flex items-center">
               <Bell className="mr-2" size={20} />
               Notification Preferences
             </h2>
@@ -204,8 +243,8 @@ const Settings = () => {
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-gray-900 dark:text-white">Order Updates</Label>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Get notified about order status changes</p>
+                  <Label className="text-[rgb(236,223,204)]">Order Updates</Label>
+                  <p className="text-sm text-[rgb(105,117,101)]">Get notified about order status changes</p>
                 </div>
                 <Switch
                   checked={notifications.orderUpdates}
@@ -215,8 +254,8 @@ const Settings = () => {
               
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-gray-900 dark:text-white">Promotions</Label>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Receive promotional offers and discounts</p>
+                  <Label className="text-[rgb(236,223,204)]">Promotions</Label>
+                  <p className="text-sm text-[rgb(105,117,101)]">Receive promotional offers and discounts</p>
                 </div>
                 <Switch
                   checked={notifications.promotions}
@@ -226,8 +265,8 @@ const Settings = () => {
               
               <div className="flex items-center justify-between">
                 <div>
-                  <Label className="text-gray-900 dark:text-white">Scan Reminders</Label>
-                  <p className="text-sm text-gray-600 dark:text-gray-300">Reminders to update your body scan</p>
+                  <Label className="text-[rgb(236,223,204)]">Scan Reminders</Label>
+                  <p className="text-sm text-[rgb(105,117,101)]">Reminders to update your body scan</p>
                 </div>
                 <Switch
                   checked={notifications.scanReminders}
@@ -241,22 +280,23 @@ const Settings = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-6"
+            transition={{ delay: 0.3 }}
+            className="rounded-lg shadow-sm p-6 border border-[rgb(105,117,101)]"
+            style={{ backgroundColor: 'rgb(24, 28, 20)' }}
           >
-            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
+            <h2 className="text-xl font-semibold text-[rgb(236,223,204)] mb-4 flex items-center">
               <Shield className="mr-2" size={20} />
               Privacy & Security
             </h2>
             
             <div className="space-y-4">
-              <Button variant="outline" className="w-full justify-start dark:border-gray-600 dark:text-white dark:hover:bg-gray-700">
+              <Button variant="outline" className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]">
                 Download My Data
               </Button>
-              <Button variant="outline" className="w-full justify-start dark:border-gray-600 dark:text-white dark:hover:bg-gray-700">
+              <Button variant="outline" className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]">
                 Privacy Policy
               </Button>
-              <Button variant="outline" className="w-full justify-start dark:border-gray-600 dark:text-white dark:hover:bg-gray-700">
+              <Button variant="outline" className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]">
                 Terms of Service
               </Button>
               <Button variant="destructive" className="w-full justify-start">

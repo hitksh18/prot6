@@ -103,33 +103,35 @@ const ChatWidget: React.FC = () => {
     }
   };
 
-  const openChat = () => {
-    setIsOpen(true);
-    if (!user) {
+  const toggleChat = () => {
+    setIsOpen(!isOpen);
+    if (!user && !isOpen) {
       setShowEmailForm(true);
     }
   };
 
   return (
     <>
-      {/* Chat Button with Logo */}
+      {/* Chat Button - Enhanced toggle functionality */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        onClick={openChat}
-        className="fixed bottom-6 right-6 z-40 frosted-glass px-6 py-3 rounded-full shadow-lg flex items-center space-x-3 hover:bg-[rgba(176,176,176,0.2)] transition-all duration-300"
-        style={{ backgroundColor: 'rgba(176, 176, 176, 0.1)' }}
+        onClick={toggleChat}
+        className="fixed bottom-6 right-6 z-40 frosted-glass px-6 py-3 rounded-full shadow-lg flex items-center space-x-3 hover:bg-[rgba(105,117,101,0.2)] transition-all duration-300"
+        style={{ backgroundColor: 'rgba(105, 117, 101, 0.1)' }}
       >
-        <div className="w-8 h-8 relative rounded-full overflow-hidden bg-[rgb(223,208,184)] flex items-center justify-center">
-          <img
-            src="/lovable-uploads/ChatGPT_Image_Jun_27__2025__12_03_44_PM-removebg-preview.png"
-            alt="RARITONE Chat"
-            className="w-6 h-6 object-contain"
-          />
+        <div className="w-8 h-8 relative rounded-full overflow-hidden bg-[rgb(236,223,204)] flex items-center justify-center">
+          {isOpen ? (
+            <X size={16} className="text-[rgb(24,28,20)]" />
+          ) : (
+            <MessageCircle size={16} className="text-[rgb(24,28,20)]" />
+          )}
         </div>
-        <span className="font-medium text-[rgb(34,40,49)]">Chat with us</span>
+        <span className="font-medium text-[rgb(236,223,204)]">
+          {isOpen ? 'Close Chat' : 'Chat with us'}
+        </span>
       </motion.button>
 
       {/* Chat Modal */}
@@ -139,18 +141,14 @@ const ChatWidget: React.FC = () => {
             initial={{ opacity: 0, y: 20, scale: 0.95 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 20, scale: 0.95 }}
-            className="fixed bottom-24 right-6 z-50 w-96 rounded-2xl shadow-2xl border border-[rgb(136,136,136)] overflow-hidden"
-            style={{ backgroundColor: 'rgb(34, 40, 49)' }}
+            className="fixed bottom-24 right-6 z-50 w-96 rounded-2xl shadow-2xl border border-[rgb(105,117,101)] overflow-hidden"
+            style={{ backgroundColor: 'rgb(24, 28, 20)' }}
           >
-            {/* Header */}
-            <div className="text-[rgb(223,208,184)] p-4 flex items-center justify-between" style={{ backgroundColor: 'rgb(57, 62, 70)' }}>
+            {/* Header - Removed background logo */}
+            <div className="text-[rgb(236,223,204)] p-4 flex items-center justify-between" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
               <div className="flex items-center space-x-3">
-                <div className="w-8 h-8 bg-[rgb(223,208,184)] rounded-full flex items-center justify-center">
-                  <img
-                    src="/lovable-uploads/ChatGPT_Image_Jun_27__2025__12_03_44_PM-removebg-preview.png"
-                    alt="RARITONE"
-                    className="w-6 h-6 object-contain"
-                  />
+                <div className="w-8 h-8 bg-[rgb(236,223,204)] rounded-full flex items-center justify-center">
+                  <MessageCircle size={16} className="text-[rgb(24,28,20)]" />
                 </div>
                 <span className="font-medium">Chat with a client advisor</span>
               </div>
@@ -160,7 +158,7 @@ const ChatWidget: React.FC = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setIsMinimized(!isMinimized)}
-                  className="p-1 hover:bg-[rgb(34,40,49)] rounded transition-colors"
+                  className="p-1 hover:bg-[rgb(24,28,20)] rounded transition-colors"
                 >
                   <ChevronDown 
                     size={16} 
@@ -171,7 +169,7 @@ const ChatWidget: React.FC = () => {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={() => setIsOpen(false)}
-                  className="p-1 hover:bg-[rgb(34,40,49)] rounded transition-colors"
+                  className="p-1 hover:bg-[rgb(24,28,20)] rounded transition-colors"
                 >
                   <X size={16} />
                 </motion.button>
@@ -188,28 +186,28 @@ const ChatWidget: React.FC = () => {
                 >
                   {/* Guest Email Form */}
                   {showEmailForm && !user && (
-                    <div className="p-4" style={{ backgroundColor: 'rgb(57, 62, 70)' }}>
-                      <h4 className="font-medium mb-2 text-[rgb(223,208,184)]">Privacy Notice</h4>
+                    <div className="p-4" style={{ backgroundColor: 'rgb(60, 61, 55)' }}>
+                      <h4 className="font-medium mb-2 text-[rgb(236,223,204)]">Privacy Notice</h4>
                       <form onSubmit={handleGuestEmailSubmit} className="space-y-3">
                         <input
                           type="email"
                           placeholder="Email"
                           value={guestEmail}
                           onChange={(e) => setGuestEmail(e.target.value)}
-                          className="w-full px-3 py-2 border border-[rgb(136,136,136)] rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(136,136,136)] text-[rgb(223,208,184)] placeholder-[rgb(176,176,176)]"
-                          style={{ backgroundColor: 'rgb(34, 40, 49)' }}
+                          className="w-full px-3 py-2 border border-[rgb(105,117,101)] rounded-md focus:outline-none focus:ring-2 focus:ring-[rgb(105,117,101)] text-[rgb(236,223,204)] placeholder-[rgb(105,117,101)]"
+                          style={{ backgroundColor: 'rgb(24, 28, 20)' }}
                           required
                         />
-                        <p className="text-xs text-[rgb(176,176,176)]">
+                        <p className="text-xs text-[rgb(105,117,101)]">
                           Your personal data is collected in the course of providing remote chat assistance and will be processed in full compliance with our privacy policy.
                         </p>
                         <div className="flex items-center space-x-2">
                           <input type="checkbox" id="accept" required className="rounded" />
-                          <label htmlFor="accept" className="text-xs text-[rgb(176,176,176)]">I accept</label>
+                          <label htmlFor="accept" className="text-xs text-[rgb(105,117,101)]">I accept</label>
                         </div>
                         <button
                           type="submit"
-                          className="w-full bg-[rgb(223,208,184)] text-[rgb(34,40,49)] py-2 rounded-md hover:bg-[rgb(200,190,170)] transition-colors"
+                          className="w-full bg-[rgb(236,223,204)] text-[rgb(24,28,20)] py-2 rounded-md hover:bg-[rgb(220,210,190)] transition-colors"
                         >
                           Start chat
                         </button>
@@ -220,7 +218,7 @@ const ChatWidget: React.FC = () => {
                   {/* Chat Messages */}
                   {(user || (!showEmailForm && guestEmail)) && (
                     <>
-                      <div className="h-64 overflow-y-auto p-4 space-y-3" style={{ backgroundColor: 'rgb(34, 40, 49)' }}>
+                      <div className="h-64 overflow-y-auto p-4 space-y-3" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
                         {messages.map((message) => (
                           <motion.div
                             key={message.id}
@@ -231,8 +229,8 @@ const ChatWidget: React.FC = () => {
                             <div
                               className={`max-w-xs px-3 py-2 rounded-lg text-sm ${
                                 message.isAdmin
-                                  ? 'bg-[rgb(57,62,70)] text-[rgb(223,208,184)] border border-[rgb(136,136,136)]'
-                                  : 'bg-[rgb(223,208,184)] text-[rgb(34,40,49)]'
+                                  ? 'bg-[rgb(60,61,55)] text-[rgb(236,223,204)] border border-[rgb(105,117,101)]'
+                                  : 'bg-[rgb(236,223,204)] text-[rgb(24,28,20)]'
                               }`}
                             >
                               {message.message}
@@ -247,11 +245,11 @@ const ChatWidget: React.FC = () => {
                             animate={{ opacity: 1 }}
                             className="flex justify-start"
                           >
-                            <div className="bg-[rgb(57,62,70)] text-[rgb(223,208,184)] px-3 py-2 rounded-lg text-sm border border-[rgb(136,136,136)]">
+                            <div className="bg-[rgb(60,61,55)] text-[rgb(236,223,204)] px-3 py-2 rounded-lg text-sm border border-[rgb(105,117,101)]">
                               <div className="flex space-x-1">
-                                <div className="w-2 h-2 bg-[rgb(176,176,176)] rounded-full animate-bounce"></div>
-                                <div className="w-2 h-2 bg-[rgb(176,176,176)] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                                <div className="w-2 h-2 bg-[rgb(176,176,176)] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                                <div className="w-2 h-2 bg-[rgb(105,117,101)] rounded-full animate-bounce"></div>
+                                <div className="w-2 h-2 bg-[rgb(105,117,101)] rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                                <div className="w-2 h-2 bg-[rgb(105,117,101)] rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                               </div>
                             </div>
                           </motion.div>
@@ -261,7 +259,7 @@ const ChatWidget: React.FC = () => {
                       </div>
 
                       {/* Message Input */}
-                      <div className="p-4 border-t border-[rgb(136,136,136)]" style={{ backgroundColor: 'rgb(34, 40, 49)' }}>
+                      <div className="p-4 border-t border-[rgb(105,117,101)]" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
                         <div className="flex space-x-2">
                           <input
                             type="text"
@@ -269,21 +267,21 @@ const ChatWidget: React.FC = () => {
                             value={newMessage}
                             onChange={(e) => setNewMessage(e.target.value)}
                             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
-                            className="flex-1 px-3 py-2 border border-[rgb(136,136,136)] rounded-full focus:outline-none focus:ring-2 focus:ring-[rgb(136,136,136)] text-[rgb(223,208,184)] placeholder-[rgb(176,176,176)]"
-                            style={{ backgroundColor: 'rgb(57, 62, 70)' }}
+                            className="flex-1 px-3 py-2 border border-[rgb(105,117,101)] rounded-full focus:outline-none focus:ring-2 focus:ring-[rgb(105,117,101)] text-[rgb(236,223,204)] placeholder-[rgb(105,117,101)]"
+                            style={{ backgroundColor: 'rgb(60, 61, 55)' }}
                           />
                           <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
                             onClick={handleSendMessage}
-                            className="px-4 py-2 bg-[rgb(223,208,184)] text-[rgb(34,40,49)] rounded-full hover:bg-[rgb(200,190,170)] transition-colors"
+                            className="px-4 py-2 bg-[rgb(236,223,204)] text-[rgb(24,28,20)] rounded-full hover:bg-[rgb(220,210,190)] transition-colors"
                           >
                             <Send size={16} />
                           </motion.button>
                           <motion.button
                             whileHover={{ scale: 1.1 }}
                             whileTap={{ scale: 0.9 }}
-                            className="px-4 py-2 bg-[rgb(57,62,70)] text-[rgb(223,208,184)] rounded-full hover:bg-[rgb(70,75,85)] transition-colors border border-[rgb(136,136,136)]"
+                            className="px-4 py-2 bg-[rgb(60,61,55)] text-[rgb(236,223,204)] rounded-full hover:bg-[rgb(70,75,85)] transition-colors border border-[rgb(105,117,101)]"
                           >
                             <Mic size={16} />
                           </motion.button>

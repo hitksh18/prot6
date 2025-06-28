@@ -2,46 +2,45 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
-
+/* Updated color system with new luxury palette */
 @layer base {
   :root {
-    --background: 57 62 70; /* #393E46 */
-    --foreground: 223 208 184; /* #DFD0B8 */
+    --background: 60 61 55; /* #3C3D37 */
+    --foreground: 236 223 204; /* #ECDFCC */
 
-    --card: 34 40 49; /* #222831 */
-    --card-foreground: 223 208 184; /* #DFD0B8 */
+    --card: 24 28 20; /* #181C14 */
+    --card-foreground: 236 223 204; /* #ECDFCC */
 
-    --popover: 34 40 49; /* #222831 */
-    --popover-foreground: 223 208 184; /* #DFD0B8 */
+    --popover: 24 28 20; /* #181C14 */
+    --popover-foreground: 236 223 204; /* #ECDFCC */
 
-    --primary: 223 208 184; /* #DFD0B8 */
-    --primary-foreground: 34 40 49; /* #222831 */
+    --primary: 236 223 204; /* #ECDFCC */
+    --primary-foreground: 24 28 20; /* #181C14 */
 
-    --secondary: 34 40 49; /* #222831 */
-    --secondary-foreground: 223 208 184; /* #DFD0B8 */
+    --secondary: 24 28 20; /* #181C14 */
+    --secondary-foreground: 236 223 204; /* #ECDFCC */
 
-    --muted: 34 40 49; /* #222831 */
-    --muted-foreground: 176 176 176; /* #B0B0B0 */
+    --muted: 24 28 20; /* #181C14 */
+    --muted-foreground: 105 117 101; /* #697565 */
 
-    --accent: 34 40 49; /* #222831 */
-    --accent-foreground: 223 208 184; /* #DFD0B8 */
+    --accent: 105 117 101; /* #697565 */
+    --accent-foreground: 236 223 204; /* #ECDFCC */
 
     --destructive: 220 38 38;
     --destructive-foreground: 248 250 252;
 
-    --border: 136 136 136; /* #888888 */
-    --input: 34 40 49; /* #222831 */
-    --ring: 136 136 136; /* #888888 */
+    --border: 105 117 101; /* #697565 */
+    --input: 24 28 20; /* #181C14 */
+    --ring: 105 117 101; /* #697565 */
 
-    --sidebar-background: 57 62 70; /* #393E46 */
-    --sidebar-foreground: 223 208 184; /* #DFD0B8 */
-    --sidebar-primary: 34 40 49; /* #222831 */
-    --sidebar-primary-foreground: 223 208 184; /* #DFD0B8 */
-    --sidebar-accent: 34 40 49; /* #222831 */
-    --sidebar-accent-foreground: 223 208 184; /* #DFD0B8 */
-    --sidebar-border: 136 136 136; /* #888888 */
-    --sidebar-ring: 136 136 136; /* #888888 */
+    --sidebar-background: 24 28 20; /* #181C14 */
+    --sidebar-foreground: 236 223 204; /* #ECDFCC */
+    --sidebar-primary: 60 61 55; /* #3C3D37 */
+    --sidebar-primary-foreground: 236 223 204; /* #ECDFCC */
+    --sidebar-accent: 60 61 55; /* #3C3D37 */
+    --sidebar-accent-foreground: 236 223 204; /* #ECDFCC */
+    --sidebar-border: 105 117 101; /* #697565 */
+    --sidebar-ring: 105 117 101; /* #697565 */
 
     --radius: 0.5rem;
   }
@@ -54,17 +53,18 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background-color: rgb(57, 62, 70);
-    color: rgb(223, 208, 184);
+    font-family: 'Inter', 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: rgb(60, 61, 55);
+    color: rgb(236, 223, 204);
   }
 
   html {
-    background-color: rgb(57, 62, 70);
+    background-color: rgb(60, 61, 55);
+    scroll-behavior: smooth;
   }
 }
 
-/* Custom animations */
+/* Enhanced animations for smooth UX */
 @keyframes logo-float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
@@ -103,6 +103,17 @@
   }
 }
 
+@keyframes smooth-scale {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 .logo-float {
   animation: logo-float 3s ease-in-out infinite;
 }
@@ -112,14 +123,18 @@
 }
 
 .slide-in-right {
-  animation: slide-in-right 0.3s ease-out;
+  animation: slide-in-right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .slide-in-left {
-  animation: slide-in-left 0.3s ease-out;
+  animation: slide-in-left 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Scrollbar styling */
+.smooth-scale {
+  animation: smooth-scale 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Enhanced scrollbar styling */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -129,24 +144,55 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(136, 136, 136, 0.5);
+  background: rgba(105, 117, 101, 0.5);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(136, 136, 136, 0.7);
+  background: rgba(105, 117, 101, 0.7);
 }
 
-/* Blur backdrop */
+/* Smooth blur backdrop */
 .backdrop-blur-custom {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
 
-/* Frosted glass effect */
+/* Enhanced frosted glass effect */
 .frosted-glass {
-  background: rgba(176, 176, 176, 0.1);
+  background: rgba(105, 117, 101, 0.1);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(136, 136, 136, 0.2);
+  border: 1px solid rgba(105, 117, 101, 0.2);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Remove scroll lag */
+html {
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Optimize animations for performance */
+.animate-spin,
+.animate-pulse,
+.animate-bounce {
+  will-change: transform;
+}
+
+/* Enhanced button hover effects */
+button {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+button:active {
+  transform: translateY(0);
 }
