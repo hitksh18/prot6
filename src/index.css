@@ -59,64 +59,115 @@
   }
 }
 
-/* Custom animations - Restored for navbar */
-@keyframes logo-float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-}
-
-@keyframes fade-in-up {
+/* Enhanced smooth scrolling animations - 120fps optimized */
+@keyframes navbar-slide-down {
   from {
+    transform: translateY(-100%);
     opacity: 0;
-    transform: translateY(30px);
   }
   to {
-    opacity: 1;
     transform: translateY(0);
+    opacity: 1;
   }
 }
 
-@keyframes slide-in-right {
+@keyframes navbar-slide-up {
   from {
-    opacity: 0;
-    transform: translateX(100%);
+    transform: translateY(0);
+    opacity: 1;
   }
   to {
-    opacity: 1;
-    transform: translateX(0);
+    transform: translateY(-100%);
+    opacity: 0;
   }
 }
 
-@keyframes slide-in-left {
+@keyframes logo-float {
+  0%, 100% { 
+    transform: translateY(0px) scale(1); 
+  }
+  50% { 
+    transform: translateY(-8px) scale(1.02); 
+  }
+}
+
+@keyframes smooth-fade-in {
   from {
     opacity: 0;
-    transform: translateX(-100%);
+    transform: translateY(20px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateX(0);
+    transform: translateY(0) scale(1);
   }
+}
+
+@keyframes smooth-slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(100%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes smooth-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0) scale(1);
+  }
+}
+
+@keyframes smooth-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Enhanced utility classes for smooth animations */
+.navbar-slide-down {
+  animation: navbar-slide-down 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.navbar-slide-up {
+  animation: navbar-slide-up 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
 .logo-float {
-  animation: logo-float 3s ease-in-out infinite;
+  animation: logo-float 4s ease-in-out infinite;
 }
 
-.fade-in-up {
-  animation: fade-in-up 0.6s ease-out;
+.smooth-fade-in {
+  animation: smooth-fade-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-.slide-in-right {
-  animation: slide-in-right 0.3s ease-out;
+.smooth-slide-in-right {
+  animation: smooth-slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-.slide-in-left {
-  animation: slide-in-left 0.3s ease-out;
+.smooth-slide-in-left {
+  animation: smooth-slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-/* Enhanced scrollbar styling with color palette */
+.smooth-scale-in {
+  animation: smooth-scale-in 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+/* Enhanced scrollbar styling with smooth transitions */
 ::-webkit-scrollbar {
   width: 6px;
+  transition: all 0.3s ease;
 }
 
 ::-webkit-scrollbar-track {
@@ -126,22 +177,128 @@
 ::-webkit-scrollbar-thumb {
   background: rgba(105, 117, 101, 0.5); /* #697565 */
   border-radius: 3px;
+  transition: background 0.3s ease;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(105, 117, 101, 0.7); /* #697565 */
+  background: rgba(105, 117, 101, 0.8); /* #697565 */
 }
 
-/* Blur backdrop */
+/* Enhanced blur backdrop with smooth transitions */
 .backdrop-blur-custom {
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
+  transition: backdrop-filter 0.3s ease;
 }
 
-/* Frosted glass effect */
+/* Enhanced frosted glass effect with smooth transitions */
 .frosted-glass {
   background: rgba(105, 117, 101, 0.1); /* #697565 */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(105, 117, 101, 0.2);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.frosted-glass:hover {
+  background: rgba(105, 117, 101, 0.15);
+  border-color: rgba(105, 117, 101, 0.3);
+}
+
+/* Smooth responsive breakpoint transitions */
+@media (max-width: 640px) {
+  .navbar-mobile {
+    padding: 0 1rem;
+  }
+  
+  .navbar-mobile .logo {
+    height: 1rem; /* 16px on mobile */
+  }
+  
+  .navbar-mobile .action-buttons {
+    gap: 0.5rem; /* 8px gap on mobile */
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  .navbar-tablet {
+    padding: 0 1.5rem;
+  }
+  
+  .navbar-tablet .logo {
+    height: 1.25rem; /* 20px on tablet */
+  }
+  
+  .navbar-tablet .action-buttons {
+    gap: 0.75rem; /* 12px gap on tablet */
+  }
+}
+
+@media (min-width: 1025px) {
+  .navbar-desktop {
+    padding: 0 2rem;
+  }
+  
+  .navbar-desktop .logo {
+    height: 1.25rem; /* 20px on desktop */
+  }
+  
+  .navbar-desktop .action-buttons {
+    gap: 1rem; /* 16px gap on desktop */
+  }
+}
+
+/* Enhanced performance optimizations for 120fps */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+.smooth-transition {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.ultra-smooth-transition {
+  transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Responsive text scaling for better mobile experience */
+@media (max-width: 640px) {
+  .responsive-text-sm {
+    font-size: 0.875rem; /* 14px */
+  }
+  
+  .responsive-text-base {
+    font-size: 1rem; /* 16px */
+  }
+  
+  .responsive-text-lg {
+    font-size: 1.125rem; /* 18px */
+  }
+}
+
+/* Enhanced focus states for accessibility */
+.focus-enhanced:focus {
+  outline: 2px solid rgb(236, 223, 204);
+  outline-offset: 2px;
+  transition: outline 0.2s ease;
+}
+
+/* Smooth hover effects for interactive elements */
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+.hover-scale {
+  transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hover-scale:hover {
+  transform: scale(1.05);
 }
