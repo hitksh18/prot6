@@ -100,7 +100,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
                 whileHover={{ scale: 1.05 }}
                 src="/IMG-20250305-WA0003-removebg-preview.png"
                 alt="RARITONE"
-                className="h-5 w-auto cursor-pointer transition-transform"
+                className="h-20 w-auto cursor-pointer transition-transform"
                 onClick={() => navigate('/')}
               />
             </div>
