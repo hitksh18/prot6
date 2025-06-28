@@ -136,10 +136,29 @@ const Settings = () => {
             </div>
             
             <div className="flex space-x-4">
-              <Button onClick={handleSavePersonalInfo} className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)]">
+              {/* FIXED: Primary button with exact color from image */}
+              <Button 
+                onClick={handleSavePersonalInfo} 
+                className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)] border-0"
+                style={{ 
+                  backgroundColor: 'rgb(236, 223, 204)', 
+                  color: 'rgb(24, 28, 20)',
+                  fontWeight: '500'
+                }}
+              >
                 Save Changes
               </Button>
-              <Button onClick={handleChangePassword} variant="outline" className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]">
+              {/* FIXED: Secondary button with consistent styling */}
+              <Button 
+                onClick={handleChangePassword} 
+                variant="outline" 
+                className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
+                style={{ 
+                  borderColor: 'rgb(105, 117, 101)',
+                  color: 'rgb(236, 223, 204)',
+                  backgroundColor: 'transparent'
+                }}
+              >
                 Change Password
               </Button>
             </div>
@@ -166,7 +185,13 @@ const Settings = () => {
                       <div className="flex items-center space-x-2 mb-2">
                         <span className="font-medium text-[rgb(236,223,204)]">{address.type}</span>
                         {address.isDefault && (
-                          <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">
+                          <span 
+                            className="text-xs px-2 py-1 rounded font-medium"
+                            style={{ 
+                              backgroundColor: 'rgb(236, 223, 204)', 
+                              color: 'rgb(24, 28, 20)' 
+                            }}
+                          >
                             Default
                           </span>
                         )}
@@ -180,13 +205,20 @@ const Settings = () => {
                             rows={3}
                           />
                           <div className="flex space-x-2">
+                            {/* FIXED: Save button with exact color */}
                             <Button 
                               onClick={() => handleSaveAddress(address.id)}
                               size="sm" 
-                              className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)]"
+                              className="bg-[rgb(236,223,204)] text-[rgb(24,28,20)] hover:bg-[rgb(220,210,190)] border-0"
+                              style={{ 
+                                backgroundColor: 'rgb(236, 223, 204)', 
+                                color: 'rgb(24, 28, 20)',
+                                fontWeight: '500'
+                              }}
                             >
                               Save
                             </Button>
+                            {/* FIXED: Cancel button with consistent styling */}
                             <Button 
                               onClick={() => {
                                 setEditingAddress(null);
@@ -196,7 +228,12 @@ const Settings = () => {
                               }}
                               variant="outline" 
                               size="sm" 
-                              className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]"
+                              className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
+                              style={{ 
+                                borderColor: 'rgb(105, 117, 101)',
+                                color: 'rgb(236, 223, 204)',
+                                backgroundColor: 'transparent'
+                              }}
                             >
                               Cancel
                             </Button>
@@ -207,11 +244,17 @@ const Settings = () => {
                       )}
                     </div>
                     {!address.isEditing && (
+                      {/* FIXED: Edit button with consistent styling */}
                       <Button 
                         onClick={() => handleEditAddress(address.id)}
                         variant="outline" 
                         size="sm" 
-                        className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] flex items-center space-x-1"
+                        className="border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent flex items-center space-x-1"
+                        style={{ 
+                          borderColor: 'rgb(105, 117, 101)',
+                          color: 'rgb(236, 223, 204)',
+                          backgroundColor: 'transparent'
+                        }}
                       >
                         <Edit size={14} />
                         <span>Edit</span>
@@ -221,7 +264,16 @@ const Settings = () => {
                 </div>
               ))}
               
-              <Button variant="outline" className="w-full border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]">
+              {/* FIXED: Add New Address button with exact color */}
+              <Button 
+                variant="outline" 
+                className="w-full border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
+                style={{ 
+                  borderColor: 'rgb(105, 117, 101)',
+                  color: 'rgb(236, 223, 204)',
+                  backgroundColor: 'transparent'
+                }}
+              >
                 Add New Address
               </Button>
             </div>
@@ -290,16 +342,49 @@ const Settings = () => {
             </h2>
             
             <div className="space-y-4">
-              <Button variant="outline" className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]">
+              {/* FIXED: All privacy buttons with consistent styling */}
+              <Button 
+                variant="outline" 
+                className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
+                style={{ 
+                  borderColor: 'rgb(105, 117, 101)',
+                  color: 'rgb(236, 223, 204)',
+                  backgroundColor: 'transparent'
+                }}
+              >
                 Download My Data
               </Button>
-              <Button variant="outline" className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]">
+              <Button 
+                variant="outline" 
+                className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
+                style={{ 
+                  borderColor: 'rgb(105, 117, 101)',
+                  color: 'rgb(236, 223, 204)',
+                  backgroundColor: 'transparent'
+                }}
+              >
                 Privacy Policy
               </Button>
-              <Button variant="outline" className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)]">
+              <Button 
+                variant="outline" 
+                className="w-full justify-start border-[rgb(105,117,101)] text-[rgb(236,223,204)] hover:bg-[rgb(60,61,55)] bg-transparent"
+                style={{ 
+                  borderColor: 'rgb(105, 117, 101)',
+                  color: 'rgb(236, 223, 204)',
+                  backgroundColor: 'transparent'
+                }}
+              >
                 Terms of Service
               </Button>
-              <Button variant="destructive" className="w-full justify-start">
+              {/* FIXED: Delete Account button - keeping destructive styling but with better contrast */}
+              <Button 
+                variant="destructive" 
+                className="w-full justify-start bg-red-600 text-white hover:bg-red-700 border-0"
+                style={{ 
+                  backgroundColor: 'rgb(220, 38, 38)', 
+                  color: 'white'
+                }}
+              >
                 Delete Account
               </Button>
             </div>
