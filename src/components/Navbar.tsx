@@ -201,7 +201,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
                 whileTap={{ scale: 0.95 }}
                 src="/IMG-20250305-WA0003-removebg-preview.png"
                 alt="RARITONE"
-                className="h-5 w-auto cursor-pointer transition-all duration-300"
+                className="h-20 w-auto cursor-pointer transition-all duration-300"
                 onClick={() => navigate('/')}
                 style={{
                   filter: `brightness(${1 + scrollY / 2000})`, // Subtle brightness change on scroll
