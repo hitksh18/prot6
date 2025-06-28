@@ -74,7 +74,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            {/* Left - Menu with 16px spacing */}
+            {/* Left - Menu with 16px spacing and animated hamburger */}
             <div className="flex items-center" style={{ marginRight: '16px' }}>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -82,15 +82,39 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
                 onClick={handleMenuClick}
                 className="flex items-center space-x-2 text-[rgb(236,223,204)] hover:text-[rgb(60,61,55)] transition-colors"
               >
-                <motion.div
-                  animate={{ rotate: isMenuOpen ? 180 : 0 }}
+                {/* Animated hamburger to cross */}
+                <div className="relative w-5 h-5 flex flex-col justify-center items-center">
+                  <motion.span
+                    animate={{
+                      rotate: isMenuOpen ? 45 : 0,
+                      y: isMenuOpen ? 0 : -3,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute w-5 h-0.5 bg-current"
+                  />
+                  <motion.span
+                    animate={{
+                      opacity: isMenuOpen ? 0 : 1,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute w-5 h-0.5 bg-current"
+                  />
+                  <motion.span
+                    animate={{
+                      rotate: isMenuOpen ? -45 : 0,
+                      y: isMenuOpen ? 0 : 3,
+                    }}
+                    transition={{ duration: 0.3 }}
+                    className="absolute w-5 h-0.5 bg-current"
+                  />
+                </div>
+                <motion.span 
+                  className="text-sm font-medium"
+                  animate={{ opacity: 1 }}
                   transition={{ duration: 0.3 }}
                 >
-                  {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-                </motion.div>
-                <span className="text-sm font-medium">
                   {isMenuOpen ? 'Close' : 'Menu'}
-                </span>
+                </motion.span>
               </motion.button>
             </div>
 
@@ -157,7 +181,7 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
         </div>
       </motion.nav>
 
-      {/* Left Menu Sidebar - Smooth fade animation */}
+      {/* Left Menu Sidebar - Enhanced with smooth animations */}
       <AnimatePresence>
         {isMenuOpen && (
           <>
@@ -186,7 +210,19 @@ const Navbar: React.FC<NavbarProps> = ({ onSearchOpen, onCartOpen }) => {
                     onClick={() => setIsMenuOpen(false)}
                     className="text-[rgb(236,223,204)] hover:text-[rgb(105,117,101)] transition-colors"
                   >
-                    <X size={24} />
+                    {/* Animated X icon */}
+                    <div className="relative w-6 h-6 flex flex-col justify-center items-center">
+                      <motion.span
+                        initial={{ rotate: 0 }}
+                        animate={{ rotate: 45 }}
+                        className="absolute w-6 h-0.5 bg-current"
+                      />
+                      <motion.span
+                        initial={{ rotate: 0 }}
+                        animate={{ rotate: -45 }}
+                        className="absolute w-6 h-0.5 bg-current"
+                      />
+                    </div>
                   </motion.button>
                 </div>
 

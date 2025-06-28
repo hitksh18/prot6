@@ -108,22 +108,23 @@ const ChatWidget: React.FC = () => {
 
   return (
     <>
-      {/* Chat Button - Enhanced with R.png image */}
+      {/* Chat Button - Enhanced with R.png image and consistent text */}
       <button
         onClick={toggleChat}
-        className="fixed bottom-6 right-6 z-40 px-6 py-3 rounded-full shadow-lg flex items-center space-x-3 hover:bg-[rgba(105,117,101,0.2)]"
+        className="fixed bottom-6 right-6 z-40 px-6 py-3 rounded-full shadow-lg flex items-center space-x-3 hover:bg-[rgba(105,117,101,0.2)] transition-colors"
         style={{ backgroundColor: 'rgba(105, 117, 101, 0.1)' }}
       >
         <div className="w-8 h-8 relative rounded-full overflow-hidden bg-[rgb(236,223,204)] flex items-center justify-center">
-          {/* Use R.png image instead of icon */}
+          {/* Use R.png image - same size always */}
           <img
-            src="R.png"
+            src="/R.png"
             alt="RARITONE Chat"
             className="w-6 h-6 object-contain"
           />
         </div>
+        {/* Keep same text and size whether open or closed */}
         <span className="font-medium text-[rgb(236,223,204)]">
-          {isOpen ? 'Close Chat' : 'Chat with us'}
+          Chat with us
         </span>
       </button>
 
@@ -133,12 +134,12 @@ const ChatWidget: React.FC = () => {
           className="fixed bottom-24 right-6 z-50 w-96 rounded-2xl shadow-2xl border border-[rgb(105,117,101)] overflow-hidden"
           style={{ backgroundColor: 'rgb(60, 61, 55)' }} // #3C3D37 bg
         >
-          {/* Header - Removed background logo */}
+          {/* Header - Clean background, no logo interference */}
           <div className="text-[rgb(236,223,204)] p-4 flex items-center justify-between" style={{ backgroundColor: 'rgb(24, 28, 20)' }}>
             <div className="flex items-center space-x-3">
               <div className="w-8 h-8 bg-[rgb(236,223,204)] rounded-full flex items-center justify-center">
                 <img
-                  src="/lovable-uploads/image.png"
+                  src="/R.png"
                   alt="RARITONE"
                   className="w-6 h-6 object-contain"
                 />
@@ -149,16 +150,16 @@ const ChatWidget: React.FC = () => {
             <div className="flex items-center space-x-2">
               <button
                 onClick={() => setIsMinimized(!isMinimized)}
-                className="p-1 hover:bg-[rgb(60,61,55)] rounded"
+                className="p-1 hover:bg-[rgb(60,61,55)] rounded transition-colors"
               >
                 <ChevronDown 
                   size={16} 
-                  className={`transform ${isMinimized ? 'rotate-180' : ''}`}
+                  className={`transform transition-transform ${isMinimized ? 'rotate-180' : ''}`}
                 />
               </button>
               <button
                 onClick={() => setIsOpen(false)}
-                className="p-1 hover:bg-[rgb(60,61,55)] rounded"
+                className="p-1 hover:bg-[rgb(60,61,55)] rounded transition-colors"
               >
                 <X size={16} />
               </button>
@@ -190,7 +191,7 @@ const ChatWidget: React.FC = () => {
                     </div>
                     <button
                       type="submit"
-                      className="w-full bg-[rgb(236,223,204)] text-[rgb(24,28,20)] py-2 rounded-md hover:bg-[rgb(220,210,190)]"
+                      className="w-full bg-[rgb(236,223,204)] text-[rgb(24,28,20)] py-2 rounded-md hover:bg-[rgb(220,210,190)] transition-colors"
                     >
                       Start chat
                     </button>
@@ -249,12 +250,12 @@ const ChatWidget: React.FC = () => {
                       />
                       <button
                         onClick={handleSendMessage}
-                        className="px-4 py-2 bg-[rgb(236,223,204)] text-[rgb(24,28,20)] rounded-full hover:bg-[rgb(220,210,190)]"
+                        className="px-4 py-2 bg-[rgb(236,223,204)] text-[rgb(24,28,20)] rounded-full hover:bg-[rgb(220,210,190)] transition-colors"
                       >
                         <Send size={16} />
                       </button>
                       <button
-                        className="px-4 py-2 bg-[rgb(24,28,20)] text-[rgb(236,223,204)] rounded-full hover:bg-[rgb(70,75,85)] border border-[rgb(105,117,101)]"
+                        className="px-4 py-2 bg-[rgb(24,28,20)] text-[rgb(236,223,204)] rounded-full hover:bg-[rgb(70,75,85)] border border-[rgb(105,117,101)] transition-colors"
                       >
                         <Mic size={16} />
                       </button>
